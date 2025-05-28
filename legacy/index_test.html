@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cesium/1.95.0/Cesium.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cesium/1.95.0/Widgets/widgets.css" rel="stylesheet">
+
+	<title>Cesium WebMap Example</title>
+	<style>
+		html, body, #cesiumContainer {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		#toolbar {
+			position: absolute;
+			top: 10px;
+			left: 10px;
+			background-color: rgba(255, 255, 255, 0.8);
+			padding: 10px;
+			border-radius: 5px;
+		}
+		#toolbar button {
+			margin-right: 5px;
+		}
+		#info {
+			position: absolute;
+			bottom: 10px;
+			left: 10px;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+    <div id="cesiumContainer"></div>
+    
+    <div id="toolbar">
+        <button onclick="flyToLocation()">Fly to Berlin</button>
+        <button onclick="addMarker()">Add Marker</button>
+        <button onclick="toggle2D3D()">Toggle 2D/3D</button>
+    </div>
+    
+    <div id="info">
+        <strong>Cesium WebMap Components:</strong>
+    </div>
+
+    <script>
+        // Initialize Cesium viewer
+        const viewer = new Cesium.Viewer("cesiumContainer");
+    </script>
+</body>
+</html>

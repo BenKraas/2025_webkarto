@@ -1,11 +1,11 @@
-# docker-compose.yml
-# Docker Compose file to build and run the frontend container.
-# - Maps container port 80 to host port 8080.
-# - Uses local Dockerfile to build the image.
+version: '3.8'
 
-version: "3.8"
 services:
-  web:
-    build: .
+  webmap:
+    image: nginx:alpine
     ports:
       - "8080:80"
+    volumes:
+      - ./src:/usr/share/nginx/html:ro
+    container_name: 3d-webmap
+    restart: unless-stopped

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Web Map with DEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/8.2.0/ol.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: white;
+        }
+
+        #container {
+            display: flex;
+            height: 100vh;
+        }
+
+        #map-2d {
+            width: 50%;
+            height: 100%;
+            position: relative;
+        }
+
+        #map-3d {
+            width: 50%;
+            height: 100%;
+            background: #000;
+        }
+
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 5px;
+            min-width: 250px;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        .control-group input[type="range"] {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .control-group button {
+            background: #444;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .control-group button:hover {
+            background: #666;
+        }
+
+        .control-group button.active {
+            background: #0066cc;
+        }
+
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .info {
+            font-size: 11px;
+            color: #999;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="map-2d">
+            <div id="controls">
+                <div class="control-group">
+                    <label>Elevation Scale</label>
+                    <input type="range" id="elevation-scale" min="0.1" max="5" step="0.1" value="1">
+                    <span id="scale-value">1.0x</span>
+                </div>
+                
+                <div class="control-group">
+                    <label>DEM Data</label>
+                    <button id="load-sample-dem" class="active">Sample DEM</button>
+                    <button id="load-file-dem">Load File</button>
+                    <input type="file" id="dem-file" accept=".tif,.tiff,.asc" style="display: none;">
+                </div>
+
+                <div class="control-group">
+                    <label>WMS Layers</label>
+                    <button id="toggle-osm" class="active">OpenStreetMap</button>
+                    <button id="toggle-satellite">Satellite</button>
+                    <button id="toggle-terrain">Terrain</button>
+                </div>
+
+                <div class="control-group">
+                    <label>View</label>
+                    <button id="reset-view">Reset Camera</button>
+                    <button id="sync-views">Sync Views</button>
+                </div>
+
+                <div class="info">
+                    <p>Left: 2D OpenLayers Map</p>
+                    <p>Right: 3D Three.js DEM</p>
+                    <p>Click and drag to navigate</p>
+                </div>
+            </div>
+        </div>
+        <div id="map-3d">
+            <div id="loading">Loading 3D terrain...</div>
+        </div>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/8.2.0/dist/ol.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="js/terrain-generator.js"></script>
+    <script src="js/map-2d.js"></script>
+    <script src="js/map-3d.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
