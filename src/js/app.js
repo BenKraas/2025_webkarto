@@ -1,229 +1,238 @@
-// Main Application Controller
+// MapLibre GL JS 3D WebMap Dashboard
 
-class WebMapApp {
-    constructor() {
-        this.map2d = null;
-        this.map3d = null;
-        this.terrainGenerator = null;
-        this.currentDEM = null;
-        
-        this.init();
-        this.setupEventListeners();
-        this.loadSampleData();
-    }
+let map;
+let demSourceId = null;
+let demLayerId = null;
+let wmsCount = 0;
+let currentDEMInfo = null;
+let elevationScale = 1.0;
 
-    init() {
-        console.log('Initializing 3D WebMap Application...');
-        
-        // Initialize components
-        this.terrainGenerator = new TerrainGenerator();
-        this.map2d = new Map2D('map-2d');
-        this.map3d = new Map3D('map-3d');
-        
-        console.log('Components initialized successfully');
-    }
+function initMap() {
+    map = new maplibregl.Map({
+        container: 'map',
+        style: {
+            version: 8,
+            sources: {
+                osm: {
+                    type: 'raster',
+                    tiles: [
+                        'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    ],
+                    tileSize: 256,
+                    attribution: '© OpenStreetMap contributors'
+                }
+            },
+            layers: [
+                {
+                    id: 'osm',
+                    type: 'raster',
+                    source: 'osm',
+                    minzoom: 0,
+                    maxzoom: 22
+                }
+            ]
+        },
+        center: [7.1, 51.5],
+        zoom: 12,
+        pitch: 60,
+        bearing: 0,
+        antialias: true
+    });
 
-    setupEventListeners() {
-        // Elevation scale control
-        const elevationScale = document.getElementById('elevation-scale');
-        const scaleValue = document.getElementById('scale-value');
-        
-        elevationScale.addEventListener('input', (e) => {
-            const scale = parseFloat(e.target.value);
-            scaleValue.textContent = scale.toFixed(1) + 'x';
-            this.map3d.updateElevationScale(scale);
-        });
-
-        // DEM loading controls
-        document.getElementById('load-sample-dem').addEventListener('click', (e) => {
-            this.loadSampleData();
-            this.setActiveButton(e.target, 'load-file-dem');
-        });
-
-        document.getElementById('load-file-dem').addEventListener('click', () => {
-            document.getElementById('dem-file').click();
-        });
-
-        document.getElementById('dem-file').addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                this.loadDEMFile(e.target.files[0]);
-                this.setActiveButton(document.getElementById('load-file-dem'), 'load-sample-dem');
-            }
-        });
-
-        // Layer toggle controls
-        document.getElementById('toggle-osm').addEventListener('click', (e) => {
-            this.map2d.toggleLayer('osm');
-            this.setActiveButton(e.target, ['toggle-satellite', 'toggle-terrain']);
-        });
-
-        document.getElementById('toggle-satellite').addEventListener('click', (e) => {
-            this.map2d.toggleLayer('satellite');
-            this.setActiveButton(e.target, ['toggle-osm', 'toggle-terrain']);
-        });
-
-        document.getElementById('toggle-terrain').addEventListener('click', (e) => {
-            this.map2d.toggleLayer('terrain');
-            this.setActiveButton(e.target, ['toggle-osm', 'toggle-satellite']);
-        });
-
-        // View controls
-        document.getElementById('reset-view').addEventListener('click', () => {
-            this.map3d.resetCamera();
-        });
-
-        document.getElementById('sync-views').addEventListener('click', () => {
-            this.syncViews();
-        });
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            switch(e.key.toLowerCase()) {
-                case 'r':
-                    this.map3d.resetCamera();
-                    break;
-                case 'w':
-                    this.map3d.toggleWireframe();
-                    break;
-                case 's':
-                    this.syncViews();
-                    break;
-            }
-        });
-    }
-
-    setActiveButton(activeButton, inactiveButtons) {
-        // Remove active class from inactive buttons
-        if (Array.isArray(inactiveButtons)) {
-            inactiveButtons.forEach(id => {
-                const btn = typeof id === 'string' ? document.getElementById(id) : id;
-                if (btn) btn.classList.remove('active');
-            });
-        } else {
-            const btn = typeof inactiveButtons === 'string' ? document.getElementById(inactiveButtons) : inactiveButtons;
-            if (btn) btn.classList.remove('active');
+    map.on('load', () => {
+        // If DEM already loaded, re-add it
+        if (currentDEMInfo) {
+            addDEMTerrain(currentDEMInfo);
         }
-        
-        // Add active class to active button
-        if (activeButton) activeButton.classList.add('active');
-    }
+    });
+}
 
-    loadSampleData() {
-        console.log('Loading sample DEM data...');
-        
-        try {
-            this.currentDEM = this.terrainGenerator.generateSampleDEM();
-            this.map3d.loadTerrain(this.currentDEM);
-            this.map2d.addDEMExtent(this.currentDEM.bounds);
-            
-            console.log('Sample DEM loaded successfully');
-        } catch (error) {
-            console.error('Error loading sample DEM:', error);
-            this.showError('Failed to load sample terrain data');
-        }
-    }
-
-    async loadDEMFile(file) {
-        console.log('Loading DEM file:', file.name);
-        
-        try {
-            // Show loading state
-            const loading = document.getElementById('loading');
-            if (loading) {
-                loading.style.display = 'block';
-                loading.textContent = 'Loading DEM file...';
-            }
-
-            // For now, we'll simulate file loading since we don't have a backend
-            // In a real implementation, you'd parse GeoTIFF or ASCII grid files here
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Generate sample data as fallback
-            this.currentDEM = this.terrainGenerator.generateSampleDEM();
-            this.map3d.loadTerrain(this.currentDEM);
-            this.map2d.addDEMExtent(this.currentDEM.bounds);
-            
-            console.log('DEM file processed (simulated)');
-            this.showInfo('DEM file loaded successfully (simulated with sample data)');
-            
-        } catch (error) {
-            console.error('Error loading DEM file:', error);
-            this.showError('Failed to load DEM file: ' + error.message);
-        }
-    }
-
-    syncViews() {
-        if (!this.currentDEM) return;
-        
-        // Get center of DEM bounds
-        const centerLon = (this.currentDEM.bounds.minX + this.currentDEM.bounds.maxX) / 2;
-        const centerLat = (this.currentDEM.bounds.minY + this.currentDEM.bounds.maxY) / 2;
-        
-        // Update 2D map view
-        this.map2d.setCenter([centerLon, centerLat], 13);
-        
-        // Reset 3D camera
-        this.map3d.resetCamera();
-        
-        console.log('Views synchronized');
-    }
-
-    showError(message) {
-        console.error(message);
-        // You could add a toast notification system here
-        alert('Error: ' + message);
-    }
-
-    showInfo(message) {
-        console.info(message);
-        // You could add a toast notification system here
-        // For now, just log to console
-    }
-
-    // Add custom WMS layer
-    addWMSLayer(name, url, layerName, options = {}) {
-        try {
-            this.map2d.addWMSLayer(name, url, layerName, options);
-            console.log(`Added WMS layer: ${name}`);
-            return true;
-        } catch (error) {
-            console.error('Error adding WMS layer:', error);
-            this.showError('Failed to add WMS layer: ' + error.message);
-            return false;
-        }
-    }
-
-    // Get application status
-    getStatus() {
-        return {
-            initialized: !!(this.map2d && this.map3d),
-            demLoaded: !!this.currentDEM,
-            terrainVisible: !!this.map3d.terrain,
-            map2dLayers: Object.keys(this.map2d.layers),
-            map3dInfo: this.map3d.getSceneInfo()
-        };
+function showLoading(msg) {
+    const loading = document.getElementById('loading');
+    if (loading) {
+        loading.style.display = 'block';
+        loading.textContent = msg;
     }
 }
 
-// Initialize application when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    window.app = new WebMapApp();
-    
-    // Expose some functions globally for debugging
-    window.addWMSLayer = (name, url, layerName, options) => {
-        return window.app.addWMSLayer(name, url, layerName, options);
+function hideLoading() {
+    const loading = document.getElementById('loading');
+    if (loading) loading.style.display = 'none';
+}
+
+function showDEMInfo(info) {
+    const demInfo = document.getElementById('dem-info');
+    if (!demInfo) return;
+    if (!info) {
+        demInfo.textContent = '';
+        return;
+    }
+    demInfo.innerHTML =
+        `<b>DEM:</b> ${info.originalName || 'Imported'}<br>` +
+        `Size: ${info.width} × ${info.height}<br>` +
+        `Elevation: ${info.minElevation}–${info.maxElevation} m`;
+}
+
+async function uploadDEMFile(file) {
+    showLoading('Uploading DEM file...');
+    const formData = new FormData();
+    formData.append('demFile', file);
+    const uploadRes = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+    });
+    const uploadData = await uploadRes.json();
+    if (!uploadData.success) throw new Error(uploadData.message || 'Upload failed');
+    return uploadData.file.fileId;
+}
+
+async function processDEM(fileId) {
+    showLoading('Processing DEM...');
+    const processRes = await fetch('/api/dem/process', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fileId, options: { width: 512, height: 512, elevationScale } })
+    });
+    const processData = await processRes.json();
+    if (!processData.success || !processData.data || !processData.data.bounds) {
+        throw new Error(processData.message || 'Processing failed or DEM metadata missing');
+    }
+    return processData.data;
+}
+
+function addDEMTerrain(demInfo) {
+    // Remove previous DEM source/layer/terrain
+    if (demSourceId && map.getSource(demSourceId)) {
+        if (demLayerId && map.getLayer(demLayerId)) {
+            map.removeLayer(demLayerId);
+        }
+        map.removeSource(demSourceId);
+    }
+    if (map.getTerrain()) {
+        map.setTerrain(null);
+    }
+
+    // Add DEM as raster-dem source
+    demSourceId = 'dem-terrain';
+    demLayerId = 'dem-terrain-layer';
+    const demUrl = `/processed/${demInfo.fileId || demInfo.id || demInfo.file_id || 'unknown'}.tif`;
+
+    map.addSource(demSourceId, {
+        type: 'raster-dem',
+        url: demUrl,
+        tileSize: 512,
+        encoding: 'mapbox',
+    });
+
+    map.setTerrain({ source: demSourceId, exaggeration: elevationScale });
+
+    map.addLayer({
+        id: demLayerId,
+        type: 'hillshade',
+        source: demSourceId,
+        layout: {},
+        paint: {
+            'hillshade-exaggeration': 0.7
+        }
+    });
+
+    // Fit map to DEM bounds if available
+    if (demInfo.bounds && isFinite(demInfo.bounds.minX) && isFinite(demInfo.bounds.minY) && isFinite(demInfo.bounds.maxX) && isFinite(demInfo.bounds.maxY)) {
+        map.fitBounds([
+            [demInfo.bounds.minX, demInfo.bounds.minY],
+            [demInfo.bounds.maxX, demInfo.bounds.maxY]
+        ], { padding: 40 });
+    }
+
+    showDEMInfo(demInfo);
+    hideLoading();
+}
+
+function resetView() {
+    if (currentDEMInfo && currentDEMInfo.bounds) {
+        map.fitBounds([
+            [currentDEMInfo.bounds.minX, currentDEMInfo.bounds.minY],
+            [currentDEMInfo.bounds.maxX, currentDEMInfo.bounds.maxY]
+        ], { padding: 40 });
+    } else {
+        map.flyTo({ center: [7.1, 51.5], zoom: 12, pitch: 60, bearing: 0 });
+    }
+}
+
+function addWMSLayer(url, layerName) {
+    wmsCount++;
+    const wmsId = `wms-${wmsCount}`;
+    map.addSource(wmsId, {
+        type: 'raster',
+        tiles: [
+            `${url}?service=WMS&request=GetMap&version=1.1.1&layers=${layerName}&styles=&format=image/png&transparent=true&srs=EPSG:3857&width=256&height=256&bbox={bbox-epsg-3857}`
+        ],
+        tileSize: 256
+    });
+    map.addLayer({
+        id: wmsId,
+        type: 'raster',
+        source: wmsId,
+        paint: { 'raster-opacity': 0.8 }
+    });
+    // Add to WMS list in sidebar
+    const wmsList = document.getElementById('wms-list');
+    if (wmsList) {
+        const li = document.createElement('li');
+        li.textContent = `${layerName} (${url})`;
+        li.style.cursor = 'pointer';
+        li.onclick = () => {
+            map.setLayoutProperty(wmsId, 'visibility', map.getLayoutProperty(wmsId, 'visibility') === 'none' ? 'visible' : 'none');
+        };
+        wmsList.appendChild(li);
+    }
+}
+
+function setupUI() {
+    document.getElementById('import-dem-btn').onclick = () => {
+        document.getElementById('dem-file').click();
     };
-    
-    window.getAppStatus = () => {
-        return window.app.getStatus();
+    document.getElementById('dem-file').onchange = async (e) => {
+        if (e.target.files.length > 0) {
+            try {
+                showLoading('Uploading DEM...');
+                const fileId = await uploadDEMFile(e.target.files[0]);
+                const demInfo = await processDEM(fileId);
+                currentDEMInfo = { ...demInfo, fileId };
+                addDEMTerrain(currentDEMInfo);
+            } catch (err) {
+                hideLoading();
+                alert('DEM import failed: ' + err.message);
+            }
+        }
     };
-    
-    console.log('3D WebMap Application ready!');
-    console.log('Keyboard shortcuts:');
-    console.log('  R - Reset 3D camera');
-    console.log('  W - Toggle wireframe');
-    console.log('  S - Sync views');
-    console.log('');
-    console.log('Use addWMSLayer(name, url, layerName, options) to add custom WMS layers');
-    console.log('Use getAppStatus() to check application status');
+    document.getElementById('elevation-scale').oninput = (e) => {
+        elevationScale = parseFloat(e.target.value);
+        document.getElementById('scale-value').textContent = elevationScale.toFixed(1) + 'x';
+        if (map && map.getTerrain()) {
+            map.setTerrain({ source: demSourceId, exaggeration: elevationScale });
+        }
+    };
+    document.getElementById('add-wms-btn').onclick = () => {
+        const url = document.getElementById('wms-url').value.trim();
+        const layerName = document.getElementById('wms-layer').value.trim();
+        if (!url || !layerName) {
+            alert('Please enter both WMS URL and Layer Name');
+            return;
+        }
+        try {
+            addWMSLayer(url, layerName);
+        } catch (err) {
+            alert('Failed to add WMS: ' + err.message);
+        }
+    };
+    document.getElementById('reset-view-btn').onclick = resetView;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    initMap();
+    setupUI();
+    hideLoading();
 });
