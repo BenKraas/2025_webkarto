@@ -1,4 +1,6 @@
-name: webkarto-env
+name: 2025_webkarto
 dependencies:
   - python=3.13
   - terminaltables
+  - ipykernel
+  - requests
