@@ -1,5 +1,0 @@
-
-
-# Server Cesium Static Assets:
-npm install vite-plugin-static-copy --save-dev
-
