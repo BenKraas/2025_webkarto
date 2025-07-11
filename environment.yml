@@ -1,0 +1,4 @@
+name: webkarto-env
+dependencies:
+  - python=3.13
+  - terminaltables
