@@ -1,4 +1,4 @@
-data/geodata/generated/bahnhoefe_running.geojson
+data/geodata/generated/*
 data/temp/*
 data/api/*
 data/logs/*
