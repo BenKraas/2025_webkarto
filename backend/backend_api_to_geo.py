@@ -258,7 +258,6 @@ def main(delay_min, placename_list, n_entries):
             logging.info(f"Geodata updated and saved to {bahnhoefe_geojson_target}.")
         except Exception as e:
             logging.warning(f"Error updating geodata: {e}. This may be harmless if you just started the script for the first time.")
-            continue
 
         for place_dm, name_dm in placename_list:
             
