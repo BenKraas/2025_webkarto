@@ -255,7 +255,7 @@ def main(delay_min, placename_list, n_entries):
             update_geodata(csv_file_target, bahnhoefe_geodata_source, bahnhoefe_geojson_target, n_entries)
             logging.info(f"Geodata updated and saved to {bahnhoefe_geojson_target}.")
         except Exception as e:
-            logging.error(f"Error updating geodata: {e}")
+            logging.warning(f"Error updating geodata: {e}. This may be harmless if you just started the script for the first time.")
             time.sleep(request_delay)
             continue
 
