@@ -10,54 +10,48 @@ import logging
 from datetime import datetime
 from pathlib import Path
 
+# File paths
+root = Path(__file__).parent.parent
+csv_file_target = root / 'data' / 'api' / 'final_departures.csv'
+bahnhoefe_geodata_source = root / 'data' / 'geodata' / 'source' / 'bahnhoefe.shp'
+bahnhoefe_geojson_target = root / 'data' / 'geodata' / 'bahnhoefe_running.geojson'
+full_request_text_target = root / 'data' / 'temp' / 'vrr_api_full_responses.txt'
+
+
 # Initialize logging to log to both file and console
-logging.basicConfig(
+def init(root):
+    if not os.path.exists(root / 'data' / 'logs'):
+        os.makedirs(root / 'data' / 'logs', exist_ok=True, parents=True)
+    logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('api_requests.log'),
+        logging.FileHandler(root / 'data' / 'logs' / 'api_requests.log'),
         logging.StreamHandler()
     ]
 )
 
-
-
 def full_api_request(datetime_dt, place_dm, name_dm):
 
-    # Function logs the API response status and handles different HTTP status codes
     def communicate_response(response, place_dm, name_dm, datetime_dt):
         """Handles the response from the API and logs the status."""
-        if response.status_code == 200:
-            logging.info(f"(200) Request successful for {place_dm} {name_dm} at {datetime_dt.isoformat()}")
-        elif response.status_code == 204:
-            logging.info(f"(204) No departures found for {place_dm} {name_dm} at {datetime_dt.isoformat()}")
-        elif response.status_code == 400:
-            logging.warning(f"(400) Bad request for {place_dm} {name_dm} at {datetime_dt.isoformat()}")
-        elif response.status_code == 404:
-            logging.error(f"(404) Not found for {place_dm} {name_dm} at {datetime_dt.isoformat()}")
-        elif response.status_code == 500:
-            logging.error(f"(500) Internal server error for {place_dm} {name_dm} at {datetime_dt.isoformat()}")
-        elif response.status_code == 503:
-            logging.error(f"(503) Service unavailable for {place_dm} {name_dm} at {datetime_dt.isoformat()}")
-        elif response.status_code == 429:
-            logging.error(f"(429) Too many requests for {place_dm} {name_dm} at {datetime_dt.isoformat()}")
-        else:
-            logging.error(f"Error: {response.status_code} - {response.text}")
+        response_lut = { 200: "Request successful", 204: "No departures found", 400: "Bad request", 404: "Not found", 500: "Internal server error", 503: "Service unavailable", 429: "Too many requests"}
+        logging.info(f"({response.status_code}) {response_lut.get(response.status_code, 'Unknown status')} for {place_dm} {name_dm} at {datetime_dt.isoformat()}")
         return response
 
-    # Function to create a unique identifier (UUID) for each departure
     def make_uid(stop, scheduled_datetime, line):
-        base = f"{stop}|{scheduled_datetime}|{line}"
-        return str(uuid.uuid5(uuid.NAMESPACE_DNS, base))
+        """Generates a unique identifier for each departure based on stop, scheduled datetime, and line."""
+        return str(uuid.uuid5(uuid.NAMESPACE_DNS, f"{stop}|{scheduled_datetime}|{line}"))
     
-    # Function to build the results from the API response
     def build_results(datetime_dt, make_uid, departures):
+        """Builds a list of dictionaries containing the departure information."""
         results = []
         for dep in departures:
             stop_name = dep.get('stopName')
             platform = dep.get('platformName', dep.get('platform'))
             scheduled = dep.get('dateTime', {})
             real = dep.get('realDateTime', {})
+            
             # Build full datetime for scheduled and real departure
             try:
                 scheduled_dt = datetime(
@@ -207,14 +201,14 @@ def update_geodata(csv_file_path, geodata_file_path, geodata_target, n_data: int
             # Create a dictionary for the stop with lists of the last 10 departures
             new_data.append({
                 'stop': stop,
-                'departures': stop_data['uuid'].tolist(),
-                'platforms': stop_data['platform'].tolist(),
-                'lines': stop_data['line'].tolist(),
-                'directions': stop_data['direction'].tolist(),
-                'scheduled_departures': stop_data['scheduled_departure'].tolist(),
-                'real_departures': stop_data['real_departure'].tolist(),
-                'delays': stop_data['delay_min'].tolist(),
-                'connection_exists': stop_data['connection_exists'].tolist()
+                'departures': stop_data['uuid'].fillna('').tolist(),
+                'platforms': stop_data['platform'].fillna('').tolist(),
+                'lines': stop_data['line'].fillna('').tolist(),
+                'directions': stop_data['direction'].fillna('').tolist(),
+                'scheduled_departures': stop_data['scheduled_departure'].fillna('').tolist(),
+                'real_departures': stop_data['real_departure'].fillna('').tolist(),
+                'delays': stop_data['delay_min'].fillna(0).tolist(),
+                'connection_exists': stop_data['connection_exists'].fillna('').tolist()
             })
 
     # Create a new GeoDataFrame from the new data
@@ -232,31 +226,26 @@ def main(delay_min, placename_list, n_entries):
     delay_s = delay_min * 60  # convert minutes to seconds
     request_delay = delay_s / total_requests # time the actual requests so that they space out over the delay time
 
-    # initialize csv
-    csv_file = Path('final_departures.csv')
-    geodata_file = Path('res/geodata/bahnhoefe.shp')
-    geodata_target = Path('data/geodata/bahnhoefe_running.geojson')
-
-    # Main loop
     logging.info(f"Total requests: {total_requests}, Delay per request: {round(request_delay/60, 2)} minutes.")
     logging.info("Starting the request loop...")
 
     # Load existing UUIDs only once at the start
     try:
-        existing_df = pd.read_csv(csv_file, usecols=['uuid'])
+        existing_df = pd.read_csv(csv_file_target, usecols=['uuid'])
         existing_uuids = set(existing_df['uuid'].dropna().astype(str))
         logging.info(f"Loaded {len(existing_uuids)} existing UUIDs.")
     except FileNotFoundError:
         existing_uuids = set()
         logging.info("No existing UUIDs found, starting fresh.")
 
+    # Main loop
     while True:
         logging.info("Starting a new cycle of requests...")
 
         # Update the geodata with the new departures
         try:
-            update_geodata(csv_file, geodata_file, geodata_target, n_entries)
-            logging.info(f"Geodata updated and saved to {geodata_target}.")
+            update_geodata(csv_file_target, bahnhoefe_geodata_source, bahnhoefe_geojson_target, n_entries)
+            logging.info(f"Geodata updated and saved to {bahnhoefe_geojson_target}.")
         except Exception as e:
             logging.error(f"Error updating geodata: {e}")
             time.sleep(request_delay)
@@ -274,7 +263,7 @@ def main(delay_min, placename_list, n_entries):
                     new_df = df[~df['uuid'].isin(existing_uuids)]
 
                     if not new_df.empty:
-                        new_df.to_csv(csv_file, mode='a', header=not existing_uuids, index=False)
+                        new_df.to_csv(csv_file_target, mode='a', header=not existing_uuids, index=False)
                         existing_uuids.update(new_df['uuid'])
 
                         logging.info(f"Appended {len(new_df)} new departures. Status code: {status_code}")
@@ -299,10 +288,15 @@ def main(delay_min, placename_list, n_entries):
         logging.info("Next cycle...")
 
 
+
 if __name__ == "__main__":
-    # Set the parameters for the main function
+    # Configuration for the main function
+    init(root)
+
+    # Set the delay in minutes and the number of entries to process
     delay_min = 10
     n_entries = 20
     placename_list = [("Duisburg", "HBF"), ("Mönchengladbach", "HBF"), ("Wuppertal", "HBF"), ("Bochum", "HBF"), ("Dortmund", "HBF"), ("Essen", "HBF"), ("Düsseldorf", "HBF")]
 
+    # Start the main function with the specified parameters
     main(delay_min, placename_list, n_entries)

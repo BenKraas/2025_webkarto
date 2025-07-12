@@ -1,0 +1,237 @@
+uuid,stop,platform,line,direction,scheduled_departure,real_departure,delay_min,connection_exists
+fe65837d-3924-542a-8e5c-b78d35223b29,Duisburg Hbf,3,ICE 727 InterCityExpress,München Hbf,17:07,17:56,49.0,True
+5dfcb9fd-988a-5815-bdbf-1476b781e8f9,Duisburg Hbf,4,ICE 848 InterCityExpress,Düsseldorf Hbf,17:50,,,True
+56eccc04-b6dc-502f-978e-4f08f968d5c3,Duisburg Hbf,13,ICE 626 InterCityExpress,Essen Hauptbahnhof,17:51,18:01,10.0,True
+a0e6b34c-8e65-58db-9a3e-08a77daab0f7,Bochum Hbf,3,ICE 1015 Norderney,München Hbf,18:03,18:05,2.0,True
+56f64974-48c2-5c6f-9417-36f3131733c6,Dortmund Hbf,10,ICE 643 InterCityExpress,S Ostbahnhof (Berlin),17:47,,,True
+2fe5e487-b7d7-502d-ad74-dd5e0ecde1fe,Dortmund Hbf,16,ICE 1015 Norderney,München Hbf,17:50,17:53,3.0,True
+2478be28-4036-51f5-8a40-2f6a2fc84563,Düsseldorf Hbf,16,ICE 727 InterCityExpress,München Hbf,17:21,18:10,49.0,True
+b9b3c4e0-31e2-575b-9cee-3258167afdf2,Düsseldorf Hbf,19,ICE 626 InterCityExpress,Essen Hauptbahnhof,17:38,17:50,12.0,True
+c4e1ab54-6614-53a5-bc93-dd232620054a,Düsseldorf Hbf,17,ICE 945 InterCityExpress,S Ostbahnhof (Berlin),17:50,,,True
+bbd351e6-d6fe-5d25-b658-5eb89a873a26,Duisburg Hbf,3,ICE 729 InterCityExpress,München Hbf,18:07,18:08,1.0,True
+6a307f10-3628-5c57-830e-85bd6c96292f,Dortmund Hbf,16,ICE 546 InterCityExpress,Köln Hbf,18:14,,,True
+13150ebe-50aa-5e93-ac2e-31bae3d4a7dc,Essen Hauptbahnhof,2,ICE 729 InterCityExpress,München Hbf,17:54,17:54,0.0,True
+3ad572bc-45bb-5888-bbac-dee1620b516b,Essen Hauptbahnhof,1,ICE 203 RÃ¼gen,Karlsruhe Hauptbahnhof,18:00,18:05,5.0,True
+fc5f829c-f0eb-5b73-b2a7-4e1853b8c18d,Duisburg Hbf,13,ICE 945 InterCityExpress,S Ostbahnhof (Berlin),18:09,,,True
+ff39b54e-0891-52dd-a937-c97959d84473,Duisburg Hbf,4,ICE 203 RÃ¼gen,Karlsruhe Hauptbahnhof,18:13,18:18,5.0,True
+91faaf11-740b-508b-91d3-f4af35e006a0,Wuppertal Hbf,2,ICE 955 InterCityExpress,S Ostbahnhof (Berlin),18:16,,,True
+ad6f6ad8-d987-51e2-805d-de86c83f2484,MG Hbf /Europaplatz,1,ICE 159 ICE International,Frankfurt (Main) Hauptbahnhof,18:34,18:34,0.0,True
+60658093-c38b-5054-9aef-b343929b3d71,Bochum Hbf,3,ICE 546 InterCityExpress,Köln Hbf,18:25,,,True
+17a4e88c-6fbb-532d-827e-df1b3011adf1,Bochum Hbf,5,ICE 945 InterCityExpress,S Ostbahnhof (Berlin),18:32,,,True
+9627702c-d11f-5b43-8241-b65919efac45,Essen Hauptbahnhof,2,ICE 1015 Norderney,München Hbf,18:15,18:18,3.0,True
+5084a958-1266-595c-a801-8eccaddc9b5f,Essen Hauptbahnhof,6,ICE 945 InterCityExpress,S Ostbahnhof (Berlin),18:21,,,True
+2081a4db-a888-5632-9157-3d3ac31375e9,Düsseldorf Hbf,16,ICE 729 InterCityExpress,München Hbf,18:21,18:29,8,True
+7cb9813f-e1a0-5ab0-a0ab-13570f38a689,Duisburg Hbf,4,ICE 1015 Norderney,München Hbf,18:30,18:31,1.0,True
+f95d76dd-4240-5234-8c5d-1a6365ae1607,Dortmund Hbf,8,ICE 945 InterCityExpress,S Ostbahnhof (Berlin),18:45,,,True
+d26dfb26-62ee-5e99-a2f4-4726f7fedf91,Düsseldorf Hbf,15,ICE 203 RÃ¼gen,Karlsruhe Hauptbahnhof,18:27,18:34,7.0,True
+5ce55156-b2dd-5eb4-bceb-3a840d58cb83,Duisburg Hbf,12,ICE 28 InterCityExpress,Dortmund Hbf,18:47,19:09,22.0,True
+18c02349-0f6f-5fea-b4d6-c29dd5ff5049,Wuppertal Hbf,2,ICE 516 InterCityExpress,Hamburg Altona,18:44,18:54,10.0,True
+488d39bb-4061-53e4-826f-c714abf5d5ab,Essen Hauptbahnhof,1,ICE 546 InterCityExpress,Köln Hbf,18:37,,,True
+da156799-1b27-5235-9f76-022c5d5c80ff,Essen Hauptbahnhof,2,ICE 821 InterCityExpress,München Hbf,18:39,18:40,1.0,True
+fcacbb83-35f6-5d8a-9031-25bac18ab650,Düsseldorf Hbf,17,ICE 28 InterCityExpress,Dortmund Hbf,18:34,18:56,22.0,True
+8aa53512-fffa-53dd-8ff8-35d8810392e5,Düsseldorf Hbf,18,ICE 624 InterCityExpress,Dortmund Hbf,18:38,19:01,23.0,True
+c690366f-1ebf-5946-be1a-4cc4763234e7,Duisburg Hbf,4,ICE 546 InterCityExpress,Köln Hbf,18:50,,,True
+0eb49d01-a93b-5157-8620-a035cc6ae78d,Duisburg Hbf,13,ICE 624 InterCityExpress,Dortmund Hbf,18:51,19:14,23.0,True
+8477c753-bc03-5b00-8b76-e0f2ea000a0f,Duisburg Hbf,3,ICE 821 InterCityExpress,München Hbf,18:53,18:54,1.0,True
+cdf8d82f-8d5d-590b-8a91-b32857edd00b,Düsseldorf Hbf,15,ICE 1015 Norderney,München Hbf,18:43,18:50,7.0,True
+d11f1ed3-1bc3-5b8a-a316-4645945ca81d,Düsseldorf Hbf,17,ICE 645 InterCityExpress,S Ostbahnhof (Berlin),18:51,,,True
+a3354086-92b7-5278-acf9-305442aa1d9d,Bochum Hbf,5,ICE 28 InterCityExpress,Dortmund Hbf,19:10,19:34,24.0,True
+93fab7d7-4262-506d-9c83-b13f26dc5a6f,Essen Hauptbahnhof,1,ICE 1021 InterCityExpress,Nürnberg Hbf,19:00,19:02,2.0,True
+44541c6b-d01d-5d22-a909-6b3c1e0c5e9d,Essen Hauptbahnhof,4,ICE 28 InterCityExpress,Dortmund Hbf,19:00,19:24,24.0,True
+9ac20da2-4121-5cd7-b161-829313943210,Essen Hauptbahnhof,6,ICE 624 InterCityExpress,Dortmund Hbf,19:04,19:29,25.0,True
+f851916d-35bf-5b26-9169-f8897e57c2ef,Düsseldorf Hbf,18,ICE 118 Bodensee,Münster (Westf) Hbf,18:59,18:59,0.0,True
+65a4b20b-b7f9-51a8-953e-e5327b8e56e6,Duisburg Hbf,13,ICE 645 InterCityExpress,S Ostbahnhof (Berlin),19:10,,,True
+9d81fb41-cd4d-5eda-b183-7e42775485b2,Duisburg Hbf,4,ICE 1021 InterCityExpress,Nürnberg Hbf,19:13,19:15,2.0,True
+70be7204-1881-55ff-90fa-e6e6b6c0fa16,Duisburg Hbf,11,ICE 118 Bodensee,Münster (Westf) Hbf,19:15,19:15,0.0,True
+ac6b03e4-fa1f-5cd1-973f-4cbf9f36ee8c,Wuppertal Hbf,1,ICE 615 InterCityExpress,München Hbf,19:15,19:15,0.0,True
+9c79190d-051f-5e8f-b849-9d20312d1221,Bochum Hbf,6,ICE 624 InterCityExpress,Dortmund Hbf,19:14,19:43,29.0,True
+e51649a1-d3cc-594c-9ec3-2cfd0305741b,Düsseldorf Hbf,15,ICE 821 InterCityExpress,München Hbf,19:07,19:08,1.0,True
+d896552d-927b-5994-9b6c-7c5fcd54c5fa,Düsseldorf Hbf,15,ICE 546 InterCityExpress,Köln Hbf,19:12,,,True
+4566c53f-9729-534a-a725-6f25db91dc33,Duisburg Hbf,13,ICE 914 InterCityExpress,Dortmund Hbf,19:28,19:34,6.0,True
+a79c3835-ed34-5210-aac8-f03af11fc701,MG Hbf /Europaplatz,3,ICE 252 InterCityExpress,Amsterdam Centraal,19:30,19:33,3.0,True
+5558f384-262c-59f0-81bb-0f25daf7b8b0,Bochum Hbf,5,ICE 645 InterCityExpress,S Ostbahnhof (Berlin),19:33,,,True
+036c9dff-bd41-5710-9ed8-728bea3cafaf,Essen Hauptbahnhof,6,ICE 645 InterCityExpress,S Ostbahnhof (Berlin),19:22,,,True
+f1682c1d-80b4-52b8-83af-600399a9275f,Düsseldorf Hbf,18,ICE 914 InterCityExpress,Dortmund Hbf,19:14,19:21,7.0,True
+a3714ab5-1188-5708-ae1e-c271a94ef567,Wuppertal Hbf,1,ICE 856 InterCityExpress,Köln Hbf,19:43,,,True
+fae3d9da-4cb9-56c4-87df-2334c770342c,Dortmund Hbf,10,ICE 645 InterCityExpress,S Ostbahnhof (Berlin),19:47,,,True
+cfeafd01-399d-5f0c-a8d1-2d31c8b4e973,Essen Hauptbahnhof,2,ICE 823 InterCityExpress,Frankfurt (Main) Hauptbahnhof,19:39,19:40,1.0,True
+29607b42-9ff8-5d2b-9b9f-2ee4953eea1e,Düsseldorf Hbf,16,ICE 1021 InterCityExpress,Nürnberg Hbf,19:27,19:27,0.0,True
+ce1678b6-4a1b-5aa3-9e6d-a8c05f1e1d8e,Düsseldorf Hbf,17,ICE 104 InterCityExpress,Hamburg Altona,19:34,19:41,7.0,True
+86a88034-5bbc-521f-8549-3a5816e41be8,Duisburg Hbf,12,ICE 104 InterCityExpress,Hamburg Altona,19:47,19:54,7,True
+4f757ce9-6141-5b87-b4ee-475a1440ccd5,Duisburg Hbf,13,ICE 622 InterCityExpress,Dortmund Hbf,19:51,20:16,25,True
+e69fc810-2d7f-59dd-951c-17f7a71fe06a,Bochum Hbf,5,ICE 914 InterCityExpress,Dortmund Hbf,19:51,20:02,11,True
+8b308207-1b94-5366-947a-61c46598bad2,Essen Hauptbahnhof,6,ICE 914 InterCityExpress,Dortmund Hbf,19:42,19:53,11.0,True
+aec1a79a-a256-5aa9-8ee2-558208e2a204,Düsseldorf Hbf,18,ICE 622 InterCityExpress,Dortmund Hbf,19:38,20:09,31.0,True
+501d2fbe-8e74-5dea-8c24-60a2f6fa58b5,Duisburg Hbf,4,ICE 823 InterCityExpress,Frankfurt (Main) Hauptbahnhof,19:53,19:55,2.0,True
+8e4af63f-83dc-543c-bb75-bb0b45320079,Düsseldorf Hbf,17,ICE 947 InterCityExpress,S Ostbahnhof (Berlin),19:50,,,True
+e99aefff-7407-5618-a1c6-858461db0b63,Duisburg Hbf,13,ICE 947 InterCityExpress,S Ostbahnhof (Berlin),20:09,,,True
+2d00b3df-ea44-5143-9370-816cde6bcbc1,Bochum Hbf,6,ICE 622 InterCityExpress,Dortmund Hbf,20:14,20:50,36.0,True
+b9b83758-1682-599d-be6f-84cac4e8c809,Dortmund Hbf,16,ICE 544 InterCityExpress,Köln Hbf,20:14,,,True
+b88b0893-2045-5700-a75c-ad86cdd790bf,Essen Hauptbahnhof,4,ICE 622 InterCityExpress,Dortmund Hbf,20:04,20:40,36.0,True
+f694df0a-1b0a-57f8-9dee-e55a3377e54e,Essen Hauptbahnhof,4,ICE 104 InterCityExpress,Hamburg Altona,20:04,20:05,1.0,True
+2c7a4e2f-4764-5b9f-8421-13765422d59f,Düsseldorf Hbf,18,ICE 114 WÃ¶rthersee,Dortmund Hbf,19:57,20:31,34.0,True
+c50ce78e-4bdc-5e05-a0bf-25cf082365e4,Duisburg Hbf,11,ICE 114 WÃ¶rthersee,Dortmund Hbf,20:17,20:44,27.0,True
+7eb4fc1f-5866-5766-b660-3f0a28421fe2,Wuppertal Hbf,1,ICE 205 InterCityExpress,Karlsruhe Hauptbahnhof,20:15,21:00,45.0,True
+6d45bcee-103e-5cea-9e52-11c010ad608d,Wuppertal Hbf,2,ICE 957 InterCityExpress,S Ostbahnhof (Berlin),20:16,,,True
+9e30a510-cfba-5319-b672-9c3c3bf5c689,Bochum Hbf,3,ICE 544 InterCityExpress,Köln Hbf,20:25,,,True
+e91ee825-0b62-56d9-a0e2-7bb90ca1be7b,Bochum Hbf,5,ICE 947 InterCityExpress,S Ostbahnhof (Berlin),20:32,,,True
+58f435ed-1c60-5cdf-835a-c63d6ed20916,Essen Hauptbahnhof,6,ICE 947 InterCityExpress,S Ostbahnhof (Berlin),20:21,,,True
+27d37bc9-4e37-5aba-9242-4e4d1b4b2cf5,Düsseldorf Hbf,15,ICE 823 InterCityExpress,Frankfurt (Main) Hauptbahnhof,20:07,20:12,5.0,True
+8a4fe5c4-02bd-5fd8-b531-7bbe9308880e,MG Hbf /Europaplatz,1,ICE 251 ICE International,Frankfurt (Main) Hauptbahnhof,20:34,20:34,0.0,True
+5db18950-ae6a-50de-8ef5-6cb8d86996dc,Dortmund Hbf,10,ICE 947 InterCityExpress,S Ostbahnhof (Berlin),20:45,,,True
+29887019-8e4b-5852-821f-17020e2813eb,Wuppertal Hbf,2,ICE 514 InterCityExpress,Hamburg Altona,20:44,21:35,51.0,True
+faffa084-e20e-569f-b175-818ef6ba88a8,Bochum Hbf,6,ICE 114 WÃ¶rthersee,Dortmund Hbf,20:45,21:06,21.0,True
+190e7b3e-58fb-50c8-8a11-02b9cb1fa16f,Essen Hauptbahnhof,6,ICE 114 WÃ¶rthersee,Dortmund Hbf,20:34,20:57,23.0,True
+ebee881d-3e01-5eab-88d4-54633025cc5d,Essen Hauptbahnhof,1,ICE 544 InterCityExpress,Köln Hbf,20:37,,,True
+b6d36ab0-6e24-5e94-a9a4-882d2be75364,Düsseldorf Hbf,17,ICE 26 InterCityExpress,Dortmund Hbf,20:34,20:45,11.0,True
+cf03f8a4-fa2c-516c-a9e6-11fecbee2ec8,Duisburg Hbf,13,ICE 26 InterCityExpress,Dortmund Hbf,20:47,20:57,10.0,True
+7037f028-df03-51dd-bdef-b2d427d9250a,Duisburg Hbf,4,ICE 544 InterCityExpress,Köln Hbf,20:50,,,True
+7a872f0a-b132-5e2c-83b8-8205cbd59717,Bochum Hbf,5,ICE 26 InterCityExpress,Dortmund Hbf,21:10,21:19,9.0,True
+98db79f7-fbe4-5249-ad48-3de8fc4aec0a,Duisburg Hbf,13,ICE 620 InterCityExpress,Dortmund Hbf,21:04,21:55,51.0,True
+a7706a63-f46e-5160-a1e4-61d30a4e81fc,Wuppertal Hbf,2,ICE 657 InterCityExpress,S Ostbahnhof (Berlin),21:17,21:24,7.0,True
+809bf2ea-9c41-5aaf-8fc7-994a88032477,Dortmund Hbf,16,ICE 844 InterCityExpress,Köln Messe/Deutz Bf,21:13,,,True
+c16ace25-e61c-53cc-814f-08983f92a409,Düsseldorf Hbf,17,ICE 620 InterCityExpress,Dortmund Hbf,20:51,21:41,50.0,True
+e662dff1-26b8-5331-917f-f29e619e8b5e,Duisburg Hbf,4,ICE 617 InterCityExpress,Stuttgart Hauptbahnhof (oben),21:13,21:21,8.0,True
+2bdc6c95-9daa-5068-a25c-d128c96578e3,MG Hbf /Europaplatz,3,ICE 254 ICE International,Amsterdam Centraal,21:51,21:52,1.0,True
+05b270da-7af1-57a6-8adc-cf79edbb5549,Bochum Hbf,3,ICE 844 InterCityExpress,Köln Messe/Deutz Bf,21:25,,,True
+c12bd6b4-55c4-5ebd-8552-27f5d25d2e26,Bochum Hbf,6,ICE 620 InterCityExpress,Dortmund Hbf,21:27,22:16,49.0,True
+2f409231-975d-546a-9e00-e9c20b9d480a,Essen Hauptbahnhof,1,ICE 617 InterCityExpress,Stuttgart Hauptbahnhof (oben),21:00,21:08,8.0,True
+4a8199f8-1106-5edc-8bd3-2fabc4074bca,Essen Hauptbahnhof,6,ICE 26 InterCityExpress,Dortmund Hbf,21:00,21:13,13.0,True
+a5d026f5-ea86-5306-9486-b33725886084,Duisburg Hbf,12,ICE 1212 InterCityExpress,Dortmund Hbf,21:29,21:33,4.0,True
+3a4e883d-f903-52da-a3f9-ca842dc5ef4a,Essen Hauptbahnhof,4,ICE 620 InterCityExpress,Dortmund Hbf,21:17,22:07,50.0,True
+6862275a-1cc7-56f2-a442-8d041b0b1255,Düsseldorf Hbf,16,ICE 544 InterCityExpress,Köln Hbf,21:09,,,True
+fd9e5df6-fde0-52fa-a715-425731b8ad57,Düsseldorf Hbf,18,ICE 1212 InterCityExpress,Dortmund Hbf,21:13,21:19,6.0,True
+27d41635-caef-5be7-9113-5ab6cb959766,Düsseldorf Hbf,16,ICE 617 InterCityExpress,Stuttgart Hauptbahnhof (oben),21:27,21:38,11.0,True
+5549e35a-3bbc-5ffd-ad57-e7cfb000e7cc,Duisburg Hbf,13,ICE 102 InterCityExpress,Hannover Hauptbahnhof,21:47,21:55,8.0,True
+7be72e19-4793-5b3b-8ce9-2dde81965165,Duisburg Hbf,4,ICE 844 InterCityExpress,Köln Messe/Deutz Bf,21:51,,,True
+fe64e01a-24b3-5d29-bbb8-c73b0825cc86,Duisburg Hbf,12,ICE 528 InterCityExpress,Dortmund Hbf,21:51,22:20,29.0,True
+54ddbd67-65fd-5270-b85e-b89090b53736,Bochum Hbf,5,ICE 1212 InterCityExpress,Dortmund Hbf,21:52,21:54,2.0,True
+20d246b7-300b-54c4-a5da-d9b0961d13a6,Essen Hauptbahnhof,1,ICE 844 InterCityExpress,Köln Messe/Deutz Bf,21:38,,,True
+b75311e0-3118-5590-992d-377a83567ad4,Essen Hauptbahnhof,6,ICE 1212 InterCityExpress,Dortmund Hbf,21:42,21:45,3.0,True
+00fd616e-f1db-556c-bba0-f09bae018346,Düsseldorf Hbf,17,ICE 102 InterCityExpress,Hannover Hauptbahnhof,21:34,21:44,10.0,True
+092cee32-2306-55e8-9cb9-0c6d2734f09a,Düsseldorf Hbf,18,ICE 528 InterCityExpress,Dortmund Hbf,21:38,22:07,29.0,True
+98e69b26-d920-518a-8e06-9b1f45ca3719,Duisburg Hbf,4,ICE 207 InterCityExpress,Köln Hbf,22:13,22:14,1.0,True
+b1f50d6e-bb96-587c-9a33-94b33da0f9f8,Bochum Hbf,5,ICE 102 InterCityExpress,Hannover Hauptbahnhof,22:10,22:31,21.0,True
+a54173c2-dc70-58c5-b3f2-2f515aefe510,Bochum Hbf,6,ICE 528 InterCityExpress,Dortmund Hbf,22:14,22:58,44.0,True
+8ad50a40-748d-5820-b3a0-186e26da4d43,Dortmund Hbf,16,ICE 542 InterCityExpress,Köln Hbf,22:14,,,True
+40586dde-95cb-5485-a376-ca095b02f1e0,Essen Hauptbahnhof,1,ICE 207 InterCityExpress,Köln Hbf,22:00,22:00,0.0,True
+a2382ace-7e9a-5caf-b78e-7b8331372905,Essen Hauptbahnhof,6,ICE 102 InterCityExpress,Hannover Hauptbahnhof,22:00,22:21,21.0,True
+1b234e12-97b4-5203-a46f-337030b295c4,Essen Hauptbahnhof,4,ICE 528 InterCityExpress,Dortmund Hbf,22:04,22:48,44.0,True
+909e08ef-ad98-5307-b7bc-41e30635efb7,Düsseldorf Hbf,15,ICE 854 InterCityExpress,Köln Hbf,21:52,,,True
+350bc194-5bff-579e-9e00-357aec233f5c,Bochum Hbf,3,ICE 542 InterCityExpress,Köln Hbf,22:25,,,True
+5e27ffdc-9c67-5493-a56b-ec1363de4a98,Dortmund Hbf,8,ICE 102 InterCityExpress,Hannover Hauptbahnhof,22:28,22:43,15.0,True
+6f2e821b-6658-57c8-9ad7-e2f620d49520,Düsseldorf Hbf,15,ICE 844 InterCityExpress,Köln Messe/Deutz Bf,22:09,,,True
+9e828d45-8cab-53f5-b362-68a91f69cf89,Duisburg Hbf,12,ICE 512 InterCityExpress,Münster (Westf) Hbf,22:48,,,True
+23534504-c0a0-557b-9b87-2813e5b0b665,Wuppertal Hbf,2,ICE 1222 InterCityExpress,Dortmund Hbf,22:49,23:09,20.0,True
+35926ab5-a829-5e1c-94bf-314c8a3af61f,Essen Hauptbahnhof,1,ICE 542 InterCityExpress,Köln Hbf,22:37,,,True
+5e2e24ad-2521-55e0-8937-4d878546bf3c,Düsseldorf Hbf,15,ICE 207 InterCityExpress,Köln Hbf,22:27,22:44,17.0,True
+8f6af231-0616-5847-8de0-7c697b318403,Duisburg Hbf,4,ICE 542 InterCityExpress,Köln Hbf,22:50,,,True
+380b92b9-2f4a-550f-8b7b-9a04b5ae250d,Duisburg Hbf,13,ICE 526 InterCityExpress,Dortmund Hbf,22:51,22:56,5.0,True
+7fd9a89c-ec8d-58bf-8597-d1bc219ed271,Düsseldorf Hbf,17,ICE 512 InterCityExpress,Münster (Westf) Hbf,22:35,,,True
+1fc29139-51dc-5ea3-bc5d-b110645aa7a2,Düsseldorf Hbf,18,ICE 526 InterCityExpress,Dortmund Hbf,22:38,22:43,5.0,True
+0668ce70-7d7d-5639-a8f9-218efcb2b0a9,Bochum Hbf,5,ICE 526 InterCityExpress,Dortmund Hbf,23:14,23:17,3.0,True
+cb616802-7256-5756-8be8-4c342c4de55b,Dortmund Hbf,11,ICE 842 InterCityExpress,Köln Hbf,23:13,,,True
+54910bdd-f1c7-5d9a-9e25-883979298fe3,Essen Hauptbahnhof,6,ICE 526 InterCityExpress,Dortmund Hbf,23:04,23:08,4.0,True
+5b3c9de8-0575-53da-8d93-c819a319a2c4,Düsseldorf Hbf,17,ICE 2912,Münster (Westf) Hbf,22:35,22:48,13.0,True
+570a9703-25b1-504e-a545-db75220894fa,Duisburg Hbf,12,ICE 2912,Münster (Westf) Hbf,22:48,23:01,13.0,True
+8ee12eb5-2e89-5058-a8b3-76de62084d24,Bochum Hbf,3,ICE 842 InterCityExpress,Köln Hbf,23:25,,,True
+3d15f978-bc9a-56e2-b034-315fbdc40446,Essen Hauptbahnhof,4,ICE 512 InterCityExpress,Münster (Westf) Hbf,23:08,,,True
+84547d34-d879-5811-bd0f-52bc1846da80,Duisburg Hbf,13,ICE 910 InterCityExpress,Dortmund Hbf,23:27,23:49,22.0,True
+dfe6f45f-18c6-56e7-ac27-a619e84aa231,Dortmund Hbf,16,ICE 619 InterCityExpress,München Hbf,23:39,1:37,118.0,True
+9fec94e8-2e30-5691-9703-3d9b47e415a6,Essen Hauptbahnhof,1,ICE 842 InterCityExpress,Köln Hbf,23:37,,,True
+2fc3dff5-b0d7-59c4-bd9d-6121e6bd6fa8,Essen Hauptbahnhof,6,ICE 910 InterCityExpress,Dortmund Hbf,23:42,0:04,22.0,True
+dd3318c3-cdeb-5279-b4ef-b1f67e9a7ea3,Düsseldorf Hbf,16,ICE 542 InterCityExpress,Köln Hbf,23:09,,,True
+fd3b8808-a691-5762-8427-e1db4e5eb7b0,Düsseldorf Hbf,17,ICE 910 InterCityExpress,Dortmund Hbf,23:12,23:38,26.0,True
+5e3fdc93-e3e9-5f8d-beaf-ff320cdf76cf,Duisburg Hbf,4,ICE 842 InterCityExpress,Köln Hbf,23:50,,,True
+425de9d0-4c0f-5321-bef2-e400a92976b1,Duisburg Hbf,13,ICE 100 InterCityExpress,S Ostbahnhof (Berlin),23:52,23:54,2.0,True
+3beac674-863e-5ecf-8d54-c519f179ce15,Bochum Hbf,3,ICE 619 InterCityExpress,München Hbf,23:51,1:49,118.0,True
+6e15258c-2f9f-528c-8d10-0b163460700a,Bochum Hbf,5,ICE 910 InterCityExpress,Dortmund Hbf,23:51,0:15,24.0,True
+518da2ed-8f58-5333-bd3a-4bf65386067e,Essen Hauptbahnhof,4,ICE 2912,Münster (Westf) Hbf,23:08,0:17,69.0,True
+8f4096b4-aa34-583a-8f48-1679b9ec052c,Düsseldorf Hbf,17,ICE 100 InterCityExpress,S Ostbahnhof (Berlin),23:35,23:41,6.0,True
+7fea428a-d7ae-5dfe-9eba-379a73f3bdd6,Duisburg Hbf,,ICE 524 InterCityExpress,Dortmund Hbf,0:12,0:23,11.0,True
+db975230-a62b-5c12-beb8-956c3c732403,Duisburg Hbf,3,ICE 619 InterCityExpress,München Hbf,0:16,2:13,117.0,True
+34377d62-0e22-5897-9021-c49b0d2d33c3,Bochum Hbf,5,ICE 100 InterCityExpress,S Ostbahnhof (Berlin),0:14,0:19,5.0,True
+23d8f93e-9dfe-5b34-ab88-f5fc68780e65,Essen Hauptbahnhof,2,ICE 619 InterCityExpress,München Hbf,0:03,2:00,117.0,True
+97566479-d121-5146-8547-baf7df1bc4f6,Essen Hauptbahnhof,,ICE 100 InterCityExpress,S Ostbahnhof (Berlin),0:04,0:09,5.0,True
+0ecc474a-2fdb-5e7e-8c05-2675ca209895,Essen Hauptbahnhof,,ICE 524 InterCityExpress,Dortmund Hbf,0:25,0:35,10.0,True
+41294df4-ee67-54b8-bf4c-c42f447d0513,Bochum Hbf,,ICE 524 InterCityExpress,Dortmund Hbf,0:35,0:45,10.0,True
+35b86a41-57a0-536f-89d2-8d959838ad8c,Dortmund Hbf,,ICE 209 InterCityExpress,Köln Hbf,0:32,1:00,28.0,True
+079c8bfb-6754-5c36-86a9-cd0db1d03e46,Dortmund Hbf,,ICE 100 InterCityExpress,S Ostbahnhof (Berlin),0:33,0:34,1.0,True
+864bac32-8594-5ebb-979e-c4ff82c45f24,Düsseldorf Hbf,17,ICE 524 InterCityExpress,Dortmund Hbf,23:59,0:11,12.0,True
+c4f35f67-4fb7-5496-ad40-e6ec74be4e25,Düsseldorf Hbf,,ICE 842 InterCityExpress,Köln Hbf,0:09,,,True
+962b6127-bbe7-533e-aa77-b0bb055367e6,Düsseldorf Hbf,,ICE 619 InterCityExpress,München Hbf,0:30,2:27,117.0,True
+1aa3da7b-db16-5271-80a5-2bf9fab96393,Bochum Hbf,3,ICE 921 InterCityExpress,Frankfurt (Main) Hauptbahnhof,1:57,2:00,3.0,True
+21405e8c-c96c-541a-8d72-edc1e145b38f,Dortmund Hbf,,ICE 921 InterCityExpress,Frankfurt (Main) Hauptbahnhof,1:45,1:47,2.0,True
+eb773359-12c3-5e35-86f8-490657c6812a,Essen Hauptbahnhof,,ICE 921 InterCityExpress,Frankfurt (Main) Hauptbahnhof,2:09,2:12,3.0,True
+6367003e-34ae-58db-a137-2ead09b65e63,Duisburg Hbf,4,ICE 921 InterCityExpress,Frankfurt (Main) Hauptbahnhof,2:22,2:37,15.0,True
+837d6ae9-6ac5-5ced-98df-ff3d5ab750fe,Dortmund Hbf,,ICE 920 InterCityExpress,Hamburg Altona,3:32,3:54,22.0,True
+76e2dfb9-1b2a-5592-9ea4-eb36a7b95105,Duisburg Hbf,,ICE 920 InterCityExpress,Hamburg Altona,2:51,3:19,28.0,True
+4421c72d-75c9-5150-b2b0-79bc18ad3f7b,Bochum Hbf,5,ICE 920 InterCityExpress,Hamburg Altona,3:16,3:41,25.0,True
+50b015f4-373d-5bdd-81a1-93c58a46b7d2,Dortmund Hbf,16,ICE 523 InterCityExpress,München Hbf,4:05,,,True
+2e72b31d-f777-5657-9649-6d9c8bc3ebee,Essen Hauptbahnhof,,ICE 920 InterCityExpress,Hamburg Altona,3:06,3:32,26.0,True
+7bacc777-f315-514d-a067-9e87280793c2,Düsseldorf Hbf,,ICE 920 InterCityExpress,Hamburg Altona,2:33,3:03,30.0,True
+209701cb-cd13-5c7c-a830-176fc990649e,Düsseldorf Hbf,,ICE 921 InterCityExpress,Frankfurt (Main) Hauptbahnhof,2:44,3:01,17.0,True
+ac750306-b6dd-55dc-9741-c8ce87875c15,Bochum Hbf,3,ICE 523 InterCityExpress,München Hbf,4:18,,,True
+5a62befa-8582-5025-b8f0-78105962b327,Essen Hauptbahnhof,2,ICE 523 InterCityExpress,München Hbf,4:30,,,True
+7f078895-08d8-57ba-b531-f7a6b02cb69e,Duisburg Hbf,3,ICE 523 InterCityExpress,München Hbf,4:43,4:44,1.0,True
+62245447-8d98-5176-8769-f910c0253076,Essen Hauptbahnhof,6,ICE 541 InterCityExpress,S Ostbahnhof (Berlin),5:18,,,True
+8b4505a1-8ab0-52a7-9bfc-816e70ee204a,Essen Hauptbahnhof,,ICE 541,Berlin Ostbahnhof,5:18,,,True
+aa9b326b-7ecb-5afb-9bd7-5eb4c9b4e813,Dortmund Hbf,20,ICE 525 InterCityExpress,München Hbf,5:23,,,True
+f9895945-d1c2-57b0-b65c-0a71d888b688,Düsseldorf Hbf,17,ICE 541 InterCityExpress,S Ostbahnhof (Berlin),4:48,,,True
+e4a56868-5dd6-56f7-a166-5d8e6d2b844b,Düsseldorf Hbf,,ICE 541,Berlin Ostbahnhof,4:48,4:48,0.0,True
+4119eafa-a011-51f5-8570-b8a98ee8e73d,Düsseldorf Hbf,16,ICE 523 InterCityExpress,München Hbf,4:57,4:58,1.0,True
+77f4b319-ab9b-591a-b45e-4100ca6e908c,Duisburg Hbf,13,ICE 541 InterCityExpress,S Ostbahnhof (Berlin),5:06,,,True
+aa7f91d4-cacb-5c12-a331-a5d9a00941f0,Duisburg Hbf,,ICE 541,Berlin Ostbahnhof,5:06,5:06,0.0,True
+85ff149c-d487-50eb-b729-a478459d1e7a,Bochum Hbf,5,ICE 541,Berlin Ostbahnhof,5:29,5:29,0.0,True
+7857291f-e51f-5843-95cd-b939c718304c,Bochum Hbf,5,ICE 541 InterCityExpress,S Ostbahnhof (Berlin),5:29,,,True
+6220d6c2-f020-5184-9125-49c159e7b98b,Bochum Hbf,3,ICE 525 InterCityExpress,München Hbf,5:36,,,True
+9aef4bb5-acda-510d-b32d-66a65e6c50a0,Dortmund Hbf,16,ICE 101 InterCityExpress,Basel SBB,5:36,5:38,2.0,True
+87660f15-1f93-535b-a332-352703957be9,Essen Hauptbahnhof,1,ICE 525 InterCityExpress,München Hbf,5:53,,,True
+a034d59e-3899-5c31-9846-c84f13370f73,Bochum Hbf,3,ICE 101 InterCityExpress,Basel SBB,5:48,5:49,1.0,True
+cf67b1a6-8cc9-5630-a6f3-462f7fd13eeb,Dortmund Hbf,,ICE 541,Berlin Ostbahnhof,5:43,5:44,1.0,True
+ddeb0515-27c6-5ea8-b0e3-24ae871541e9,Dortmund Hbf,10,ICE 541 InterCityExpress,S Ostbahnhof (Berlin),5:43,,,True
+0cd41c88-f7c2-518d-8ae1-2e1df4676bf0,Dortmund Hbf,16,ICE 913 InterCityExpress,München Hbf,5:48,,,True
+144f3c27-4a58-5499-886b-be6a323345dd,Bochum Hbf,3,ICE 913 InterCityExpress,München Hbf,6:02,6:02,0.0,True
+75463328-75a8-50ae-9dec-c22943db0826,Düsseldorf Hbf,,ICE 843,Berlin Ostbahnhof,5:50,5:52,2.0,True
+f2895fdb-8dd3-52a0-a1f6-3015d1b47081,Düsseldorf Hbf,17,ICE 843 InterCityExpress,S Ostbahnhof (Berlin),5:50,,,True
+c6452ba5-c387-56bd-96c2-43e30b331366,Duisburg Hbf,3,ICE 525 InterCityExpress,München Hbf,6:07,6:09,2.0,True
+a5e7e9eb-69c9-5693-ad7e-e6c7f18260b7,Essen Hauptbahnhof,2,ICE 101 InterCityExpress,Basel SBB,6:00,6:00,0.0,True
+92396e09-beb4-5e4a-8b41-829b103681ff,Essen Hauptbahnhof,2,ICE 913 InterCityExpress,München Hbf,6:14,6:15,1.0,True
+af70b7f2-c337-5ec8-b038-aca037276d44,Duisburg Hbf,,ICE 843,Berlin Ostbahnhof,6:09,6:09,0.0,True
+3724f554-29f4-5d0f-a4f1-1ba1cfc1efe7,Duisburg Hbf,13,ICE 843 InterCityExpress,S Ostbahnhof (Berlin),6:09,,,True
+5c21ee3b-2223-5c5e-ae46-af2221723276,Duisburg Hbf,3,ICE 101 InterCityExpress,Basel SBB,6:13,6:14,1.0,True
+7c3d3170-bd4d-5cb7-929a-542bdc591fc4,Dortmund Hbf,16,ICE 527 InterCityExpress,München Hbf,6:23,6:23,0.0,True
+5ba4676f-be21-5a56-8522-ff415921ce03,Essen Hauptbahnhof,,ICE 843,Berlin Ostbahnhof,6:21,6:22,1.0,True
+96ecdc9e-21ea-571c-b27d-23fea0a1d56c,Essen Hauptbahnhof,6,ICE 843 InterCityExpress,S Ostbahnhof (Berlin),6:21,,,True
+9b40bdbb-c016-5cf9-87e4-787d908ea31e,Wuppertal Hbf,2,ICE 853,Berlin Ostbahnhof,6:16,6:18,2.0,True
+42b2debe-5d86-5273-9267-cc1d5bb29d02,Wuppertal Hbf,2,ICE 853 InterCityExpress,S Ostbahnhof (Berlin),6:16,,,True
+8663d5e3-e48c-578a-b03a-09a50cd028e4,Bochum Hbf,5,ICE 843 InterCityExpress,S Ostbahnhof (Berlin),6:32,,,True
+5a2398c7-804a-5776-a820-dfef02822963,Bochum Hbf,5,ICE 843,Berlin Ostbahnhof,6:32,6:32,0.0,True
+f6ea904a-dab8-5fa7-bb9d-a9c0326935e6,Dortmund Hbf,11,ICE 1621 InterCityExpress,München Hbf,6:36,,,True
+a841c031-51f2-5dba-aea1-981564c54a04,Dortmund Hbf,,ICE 2947,München Hbf,6:36,,,True
+9a31ecb0-cb3a-5026-be20-353b051195d0,Duisburg Hbf,4,ICE 913 InterCityExpress,München Hbf,6:27,6:29,2.0,True
+53083da3-beb0-5b5b-9962-ca206ff1554c,Bochum Hbf,3,ICE 527 InterCityExpress,München Hbf,6:36,6:36,0.0,True
+96d84068-51cc-53cb-9152-2f5d96d642e2,Düsseldorf Hbf,16,ICE 525 InterCityExpress,München Hbf,6:21,6:22,1.0,True
+1f2317f5-a443-5797-ae89-609ab5e64613,Dortmund Hbf,10,ICE 843 InterCityExpress,S Ostbahnhof (Berlin),6:45,,,True
+adfbdce4-1428-5809-9f04-e35023f5119a,Dortmund Hbf,,ICE 843,Berlin Ostbahnhof,6:45,6:46,1.0,True
+7bf38a32-81c1-5cec-8ad8-d5d06b6e416f,Düsseldorf Hbf,15,ICE 101 InterCityExpress,Basel SBB,6:27,6:29,2.0,True
+08ff7928-9ee6-51f1-aa9f-c218ce665cce,Düsseldorf Hbf,17,ICE 618 InterCityExpress,Kiel Hbf,6:33,6:37,4.0,True
+e6eb07f0-ab32-5e3a-a780-042b8445651f,Essen Hauptbahnhof,2,ICE 527 InterCityExpress,München Hbf,6:54,6:54,0.0,True
+92ebddf0-e8d6-5b68-b7ee-63d61499fd2c,Düsseldorf Hbf,17,ICE 1038 InterCityExpress,Hamburg Altona,6:41,6:41,0.0,True
+6c0a61e9-d8bd-52b6-b427-6973e1bb50b8,Duisburg Hbf,13,ICE 618 InterCityExpress,Kiel Hbf,6:47,6:51,4.0,True
+0d1ccd65-ce5f-57e4-8d34-3ae43f44cab4,Essen Hauptbahnhof,1,ICE 513 InterCityExpress,München Hbf,7:00,7:00,0.0,True
+9b976156-1ac9-5747-9ba4-e07db1211c1f,Essen Hauptbahnhof,4,ICE 618 InterCityExpress,Kiel Hbf,7:00,7:03,3.0,True
+121d17c5-f783-57e5-86ff-c1ef52db3909,Essen Hauptbahnhof,4,ICE 1038 InterCityExpress,Hamburg Altona,7:06,7:07,1.0,True
+5a3b984e-1cd0-5410-bc83-956d82e5663e,Düsseldorf Hbf,15,ICE 913 InterCityExpress,München Hbf,6:47,6:47,0.0,True
+e7c9378c-5043-5799-b185-b2417d9211b2,Düsseldorf Hbf,17,ICE 543 InterCityExpress,S Ostbahnhof (Berlin),6:51,,,True
+59757893-5960-5142-b7cc-4dfb195f6a0f,Duisburg Hbf,13,ICE 1038 InterCityExpress,Hamburg Altona,6:54,6:55,1.0,True
+e940ee95-bc58-5ad2-8659-9c00d38dae4a,MG Hbf /Europaplatz,3,ICE 1252 Int. reserveren verplicht,Amsterdam Centraal,7:26,7:26,0.0,True
+219fd761-7e57-5cf0-bfd1-f38a7aa5f603,Dortmund Hbf,16,ICE 529 InterCityExpress,München Hbf,7:23,,,True
+ddf2b205-2313-5a0e-b389-34c7155bd959,Düsseldorf Hbf,,ICE 543,Berlin Ostbahnhof,6:51,6:52,1.0,True
+9321c5a5-ba5c-5589-887c-dfa1311d52c5,Duisburg Hbf,4,ICE 527 InterCityExpress,München Hbf,7:08,7:09,1.0,True
+d393a798-8718-523b-a77e-9df25e4cd357,Duisburg Hbf,13,ICE 543 InterCityExpress,S Ostbahnhof (Berlin),7:10,,,True
+4b4e5ad8-ff9d-5cc7-b22c-ceb7728ec53a,Duisburg Hbf,,ICE 543,Berlin Ostbahnhof,7:10,7:11,1.0,True
+a9af6e6f-ca6f-57d6-9b8f-7da51054bf90,Duisburg Hbf,4,ICE 513 InterCityExpress,München Hbf,7:13,7:14,1.0,True
+fbf8cd0d-5758-57ec-97bc-ce88ceb7b892,MG Hbf /Europaplatz,3,ICE 1252 ICE International,Amsterdam Centraal,7:26,,,True
+5dbcc633-8e96-5b5a-84c2-b1080b391cb8,Wuppertal Hbf,1,ICE 2947,München Hbf,7:15,7:20,5.0,True
+bcab5eba-05e9-5d82-abdf-385025462ab8,Wuppertal Hbf,1,ICE 1621 InterCityExpress,München Hbf,7:15,,,True

@@ -1,8 +1,6 @@
 name: 2025_webkarto
 dependencies:
   - python=3.13
-  - terminaltables
   - ipykernel
   - requests
   - geopandas
-  - gdal
