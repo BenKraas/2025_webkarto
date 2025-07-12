@@ -46,6 +46,21 @@ async def on_cleanup(app):
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Run web server with backend process.")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('--local', action='store_true', help='[default] Serve only on localhost (127.0.0.1)')
+    group.add_argument('--global', dest='global_', action='store_true', help='Serve on all interfaces (0.0.0.0)')
+    args = parser.parse_args()
+
+    # Default is local (127.0.0.1) unless --global is specified
+    if args.global_:
+        host = '0.0.0.0'
+        print("[INFO] Serving frontend at http://0.0.0.0:8080/")
+    else:
+        host = '127.0.0.1'
+        print("[INFO] Serving frontend at http://127.0.0.1:8080/")
+
     app = web.Application()
     # Serve index.html at root
     app.router.add_get('/', handle_index)
@@ -56,8 +71,8 @@ def main():
     app.router.add_static('/data/', str(DATA_DIR), show_index=True)
     app.on_startup.append(on_startup)
     app.on_cleanup.append(on_cleanup)
-    print("[INFO] Serving frontend at http://0.0.0.0:8080/")
-    web.run_app(app, port=8080, host='0.0.0.0')
+
+    web.run_app(app, port=8080, host=host)
 
 if __name__ == '__main__':
     main()
