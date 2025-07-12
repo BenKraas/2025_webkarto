@@ -1,4 +1,4 @@
-data/geodata/generated/*
+# data/geodata/generated/*
 data/temp/*
 data/api/*
 data/logs/*
