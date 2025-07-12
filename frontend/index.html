@@ -9,11 +9,22 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="map-feature-container" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;display:flex;flex-direction:column;">
-    <div id="map" style="flex:0 0 70vh;min-height:50px;width:100vw;z-index:500;"></div>
-    <div id="resize-handle" style="height:8px;cursor:row-resize;background:#ccc;z-index:900;"></div>
-    <div id="feature-details" style="flex:1 1 30vh;min-height:40px;width:100vw;z-index:1000;background:white;padding:10px;overflow:auto;border-top:2px solid #888;box-shadow:0 -2px 8px rgba(0,0,0,0.08);"></div>
+  <!-- Layout variables are now handled by CSS variables for full responsiveness -->
+  <div class="container-group">
+    <div class="main-content-wrapper">
+      <div id="left-panel">
+        <!-- Left panel content goes here -->
+        <div class="side-panel-title">Side Panel</div>
+        <div class="side-panel-content">Add content here...</div>
+      </div>
+      <div id="map-feature-container">
+        <div id="map"></div>
+        <div id="resize-handle"></div>
+        <div id="feature-details"></div>
+      </div>
+    </div>
   </div>
+  
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="js/feature_share.js"></script>

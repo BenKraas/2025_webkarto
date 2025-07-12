@@ -14,7 +14,7 @@ from pathlib import Path
 root = Path(__file__).parent.parent
 csv_file_target = root / 'data' / 'api' / 'final_departures.csv'
 bahnhoefe_geodata_source = root / 'data' / 'geodata' / 'source' / 'bahnhoefe.shp'
-bahnhoefe_geojson_target = root / 'data' / 'geodata' / 'bahnhoefe_running.geojson'
+bahnhoefe_geojson_target = root / 'data' / 'geodata' / 'generated' / 'bahnhoefe_running.geojson'
 full_request_text_target = root / 'data' / 'temp' / 'vrr_api_full_responses.txt'
 
 
