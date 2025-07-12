@@ -124,7 +124,7 @@ def full_api_request(datetime_dt, place_dm, name_dm):
     }
 
     # Create a text file to store the raw API responses (Debugging purposes)
-    textfile = Path("vrr_api_full_responses.txt")
+    textfile = full_request_text_target
     if not textfile.exists():
         textfile.touch()
 
