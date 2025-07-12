@@ -4,3 +4,5 @@ dependencies:
   - terminaltables
   - ipykernel
   - requests
+  - geopandas
+  - gdal

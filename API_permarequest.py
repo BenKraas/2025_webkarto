@@ -2,10 +2,12 @@
 # imports
 import requests
 import pandas as pd
+import geopandas as gpd
 import uuid
 import time
 import os
 import logging
+from osgeo import gdal
 from datetime import datetime
 from pathlib import Path
 
@@ -18,6 +20,7 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+
 
 
 def full_api_request(datetime_dt, place_dm, name_dm):
@@ -180,14 +183,60 @@ def full_api_request(datetime_dt, place_dm, name_dm):
     # return df_departures, response.status_code
     return df_departures, response.status_code
 
+def update_geodata(csv_file_path, geodata_file_path, geodata_target, n_data: int):
+    """
+    For each stop in the DataFrame, get the last 10 departures and add them as lists into the GeoDataFrame.
+    The GeoDataFrame uses short column names due to shapefile limitations, so columns are mapped accordingly.
+    """
+
+    row_load = n_data*20
+
+    # Load the CSV file into a DataFrame, get the last 200 rows
+    df = pd.read_csv(csv_file_path, usecols=[
+        'uuid', 'stop', 'platform', 'line', 'direction',
+        'scheduled_departure', 'real_departure', 'delay_min', 'connection_exists'
+    ]).tail(200)
+
+    # Load the geodata shapefile
+    gdf = gpd.read_file(geodata_file_path)
+
+    # Create a new DataFrame which will get the last 10 departures for each stop and put them into lists for each column so that only one row per stop is created
+    new_data = []
+    for stop in gdf['stop'].unique():
+        stop_data = df[df['stop'] == stop].sort_values(by='scheduled_departure').tail(n_data)
+        if not stop_data.empty:
+            # Create a dictionary for the stop with lists of the last 10 departures
+            new_data.append({
+                'stop': stop,
+                'departures': stop_data['uuid'].tolist(),
+                'platforms': stop_data['platform'].tolist(),
+                'lines': stop_data['line'].tolist(),
+                'directions': stop_data['direction'].tolist(),
+                'scheduled_departures': stop_data['scheduled_departure'].tolist(),
+                'real_departures': stop_data['real_departure'].tolist(),
+                'delays': stop_data['delay_min'].tolist(),
+                'connection_exists': stop_data['connection_exists'].tolist()
+            })
+
+    # Create a new GeoDataFrame from the new data
+    new_gdf = gpd.GeoDataFrame(new_data, geometry=gdf.geometry[gdf['stop'].isin([d['stop'] for d in new_data])].values, crs=gdf.crs)
+
+    # Save the new GeoDataFrame to the target geojson file
+    if not geodata_target.parent.exists():
+        geodata_target.parent.mkdir(parents=True)
+    new_gdf.to_file(geodata_target, driver='GeoJSON')
+
+
 # Main function to handle the API requests and manage the CSV file
-def main(delay_min, placename_list):
+def main(delay_min, placename_list, n_entries):
     total_requests = len(placename_list)
     delay_s = delay_min * 60  # convert minutes to seconds
     request_delay = delay_s / total_requests # time the actual requests so that they space out over the delay time
 
     # initialize csv
     csv_file = Path('final_departures.csv')
+    geodata_file = Path('res/geodata/bahnhoefe.shp')
+    geodata_target = Path('data/geodata/bahnhoefe_running.geojson')
 
     # Main loop
     logging.info(f"Total requests: {total_requests}, Delay per request: {round(request_delay/60, 2)} minutes.")
@@ -195,7 +244,7 @@ def main(delay_min, placename_list):
 
     # Load existing UUIDs only once at the start
     try:
-        existing_df = pd.read_csv('final_departures.csv', usecols=['uuid'])
+        existing_df = pd.read_csv(csv_file, usecols=['uuid'])
         existing_uuids = set(existing_df['uuid'].dropna().astype(str))
         logging.info(f"Loaded {len(existing_uuids)} existing UUIDs.")
     except FileNotFoundError:
@@ -205,7 +254,17 @@ def main(delay_min, placename_list):
     while True:
         logging.info("Starting a new cycle of requests...")
 
+        # Update the geodata with the new departures
+        try:
+            update_geodata(csv_file, geodata_file, geodata_target, n_entries)
+            logging.info(f"Geodata updated and saved to {geodata_target}.")
+        except Exception as e:
+            logging.error(f"Error updating geodata: {e}")
+            time.sleep(request_delay)
+            continue
+
         for place_dm, name_dm in placename_list:
+            
             try:
                 datetime_dt = datetime.now()
 
@@ -216,8 +275,9 @@ def main(delay_min, placename_list):
                     new_df = df[~df['uuid'].isin(existing_uuids)]
 
                     if not new_df.empty:
-                        new_df.to_csv('final_departures.csv', mode='a', header=not existing_uuids, index=False)
+                        new_df.to_csv(csv_file, mode='a', header=not existing_uuids, index=False)
                         existing_uuids.update(new_df['uuid'])
+
                         logging.info(f"Appended {len(new_df)} new departures. Status code: {status_code}")
                     else:
                         logging.info("No new UUIDs to append.")
@@ -241,8 +301,9 @@ def main(delay_min, placename_list):
 
 
 if __name__ == "__main__":
-    # Set the delay in minutes and the list of places to query
+    # Set the parameters for the main function
     delay_min = 10
+    n_entries = 20
     placename_list = [("Duisburg", "HBF"), ("Mönchengladbach", "HBF"), ("Wuppertal", "HBF"), ("Bochum", "HBF"), ("Dortmund", "HBF"), ("Essen", "HBF"), ("Düsseldorf", "HBF")]
 
-    main(delay_min, placename_list)
+    main(delay_min, placename_list, n_entries)
