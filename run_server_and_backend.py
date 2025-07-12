@@ -56,8 +56,8 @@ def main():
     app.router.add_static('/data/', str(DATA_DIR), show_index=True)
     app.on_startup.append(on_startup)
     app.on_cleanup.append(on_cleanup)
-    print("[INFO] Serving frontend at http://localhost:8080/")
-    web.run_app(app, port=8080)
+    print("[INFO] Serving frontend at http://0.0.0.0:8080/")
+    web.run_app(app, port=8080, host='0.0.0.0')
 
 if __name__ == '__main__':
     main()
