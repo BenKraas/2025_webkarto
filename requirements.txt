@@ -1,0 +1,7 @@
+# requirements.txt for 2025_webkarto
+# To install: pip install -r requirements.txt
+
+ipykernel
+requests
+geopandas
+aiohttp

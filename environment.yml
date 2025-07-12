@@ -1,6 +1,10 @@
+# To be used with conda/mamba to create an environment for the 2025 WebKarto project
+# This file specifies the Python version and required packages for the project.
+
 name: 2025_webkarto
 dependencies:
   - python=3.13
   - ipykernel
   - requests
   - geopandas
+  - aiohttp
