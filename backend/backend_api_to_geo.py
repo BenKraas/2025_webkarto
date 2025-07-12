@@ -181,14 +181,14 @@ def update_geodata(csv_file_path, geodata_file_path, geodata_target, n_data: int
     For each stop in the DataFrame, get the last 10 departures and add them as lists into the GeoDataFrame.
     The GeoDataFrame uses short column names due to shapefile limitations, so columns are mapped accordingly.
     """
-
-    row_load = n_data*20
+    # Define the number of rows to load from the CSV file
+    row_load = n_data * 40
 
     # Load the CSV file into a DataFrame, get the last 200 rows
     df = pd.read_csv(csv_file_path, usecols=[
         'uuid', 'stop', 'platform', 'line', 'direction',
         'scheduled_departure', 'real_departure', 'delay_min', 'connection_exists'
-    ]).tail(200)
+    ]).tail(row_load)
 
     # Load the geodata shapefile
     gdf = gpd.read_file(geodata_file_path)

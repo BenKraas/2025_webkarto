@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Load GeoJSON from local file
-fetch('../data/geodata/generated/bahnhoefe_running.geojson')
+fetch('/data/geodata/generated/bahnhoefe_running.geojson')
 	.then(response => response.text())
 	.then(text => {
 		let data;
