@@ -7,7 +7,6 @@ import uuid
 import time
 import os
 import logging
-from osgeo import gdal
 from datetime import datetime
 from pathlib import Path
 
