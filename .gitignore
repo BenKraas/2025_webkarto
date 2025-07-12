@@ -3,3 +3,4 @@ data/temp/*
 data/api/*
 data/logs/*
 
+venv/*
