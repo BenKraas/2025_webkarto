@@ -41,5 +41,4 @@ Dies ist ein Beispielprojekt, das eine API bereitstellt, um Live-Daten zu ziehen
 
 - In VSCode: F1 (Command Palette) -> Python: Create Environment (Python 3.11, Venv, requirements.txt)
 - Backend starten: run_server_and_backend.py
-- ODER run_server_and_backend.bat
 - Frontend starten: index.html im Browser öffnen (bzw. http://localhost:8080/index.html)
