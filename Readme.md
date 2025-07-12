@@ -1,6 +1,8 @@
 # Todo
 
-Test im Uni-Environment
+- Code Comments
+- Test im Uni-Environment
+- Saubere Installationsanleitung
 
 # Projektname
 
