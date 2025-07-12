@@ -303,8 +303,8 @@ if __name__ == "__main__":
     init(root)
 
     # Set the delay in minutes and the number of entries to process
-    delay_min = 10
-    n_entries = 20
+    delay_min = 1
+    n_entries = 30
     placename_list = [("Duisburg", "HBF"), ("Mönchengladbach", "HBF"), ("Wuppertal", "HBF"), ("Bochum", "HBF"), ("Dortmund", "HBF"), ("Essen", "HBF"), ("Düsseldorf", "HBF")]
 
     # Start the main function with the specified parameters
