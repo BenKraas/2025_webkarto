@@ -56,14 +56,7 @@ def main():
     app.router.add_static('/data/', str(DATA_DIR), show_index=True)
     app.on_startup.append(on_startup)
     app.on_cleanup.append(on_cleanup)
-    import webbrowser
-    url = "http://localhost:8080/"
-    print(f"[INFO] Serving frontend at {url}")
-    # Open the default web browser to the local page
-    try:
-        webbrowser.open(url)
-    except Exception as e:
-        print(f"[WARN] Could not open browser automatically: {e}")
+    print("[INFO] Serving frontend at http://localhost:8080/")
     web.run_app(app, port=8080)
 
 if __name__ == '__main__':
