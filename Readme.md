@@ -22,7 +22,7 @@ Dies ist ein Beispielprojekt, das eine API bereitstellt, um Live-Daten zu ziehen
 - frontend/style.css: Stile für die Karte
 - frontend/js/script.js: JavaScript für die Interaktivität der Karte
 
-## Legende in der Webkarte
+## Legende in der Webkarte (WIP)
 - Rot: Average Delay
 - Gelb/Orange: Average Delay (2nd)
 - Grün: Average Delay (3rd)
@@ -32,3 +32,10 @@ Dies ist ein Beispielprojekt, das eine API bereitstellt, um Live-Daten zu ziehen
 ## Workflowdiagramm
 
 ![Workflow Diagramm](workflow%20V1.png)
+
+## Installation
+
+- In VSCode: F1 (Command Palette) -> Python: Create Environment (Python 3.11, Venv, requirements.txt)
+- Backend starten: run_server_and_backend.py
+- ODER run_server_and_backend.bat
+- Frontend starten: index.html im Browser öffnen (bzw. http://localhost:8080/index.html)
