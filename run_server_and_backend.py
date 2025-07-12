@@ -1,23 +1,27 @@
+
 import asyncio
-import os
+import sys
+from pathlib import Path
 from aiohttp import web
 
+
 # Paths
-ROOT = os.path.dirname(os.path.abspath(__file__))
-FRONTEND_DIR = os.path.join(ROOT, 'frontend')
-BACKEND_SCRIPT = os.path.join(ROOT, 'backend', 'backend_api_to_geo.py')
+ROOT = Path(__file__).resolve().parent
+FRONTEND_DIR = ROOT / 'frontend'
+BACKEND_SCRIPT = ROOT / 'backend' / 'backend_api_to_geo.py'
+
 
 # Serve static files (index.html, js, css, etc.)
 async def handle_index(request):
-    return web.FileResponse(os.path.join(FRONTEND_DIR, 'index.html'))
+    return web.FileResponse(str(FRONTEND_DIR / 'index.html'))
 
 async def start_backend_process():
     """Run the backend script and stream its output to the server console."""
     process = await asyncio.create_subprocess_exec(
-        'python3', BACKEND_SCRIPT,
+        sys.executable, '-u', str(BACKEND_SCRIPT),
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.STDOUT,
-        cwd=ROOT
+        cwd=str(ROOT)
     )
     print(f"[INFO] Started backend process with PID {process.pid}")
     # Stream output
@@ -40,19 +44,20 @@ async def on_cleanup(app):
         except asyncio.CancelledError:
             pass
 
+
 def main():
     app = web.Application()
     # Serve index.html at root
     app.router.add_get('/', handle_index)
     # Serve static files (js, css, etc.)
-    app.router.add_static('/', FRONTEND_DIR, show_index=True)
+    app.router.add_static('/', str(FRONTEND_DIR), show_index=True)
     # Serve data directory for geojson and other files
-    DATA_DIR = os.path.join(ROOT, 'data')
-    app.router.add_static('/data/', DATA_DIR, show_index=True)
+    DATA_DIR = ROOT / 'data'
+    app.router.add_static('/data/', str(DATA_DIR), show_index=True)
     app.on_startup.append(on_startup)
     app.on_cleanup.append(on_cleanup)
-    print("[INFO] Serving frontend at http://localhost:8080/")
-    web.run_app(app, port=8080)
+    print("[INFO] Serving frontend at http://0.0.0.0:8080/ (LAN accessible)")
+    web.run_app(app, host='0.0.0.0', port=8080)
 
 if __name__ == '__main__':
     main()
