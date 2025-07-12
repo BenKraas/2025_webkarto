@@ -234,7 +234,7 @@ def update_geodata(csv_file_path, geodata_file_path, geodata_target, n_data: int
 def main(delay_min, placename_list, n_entries):
     total_requests = len(placename_list)
     delay_s = delay_min * 60  # convert minutes to seconds
-    request_delay = delay_s / total_requests # time the actual requests so that they space out over the delay time
+    request_delay = delay_s / (total_requests + 1)  # time the actual requests so that they space out over the delay time
 
     logging.info(f"Total requests: {total_requests}, Delay per request: {round(request_delay/60, 2)} minutes.")
     logging.info("Starting the request loop...")
@@ -293,7 +293,8 @@ def main(delay_min, placename_list, n_entries):
                 logging.error(f"An error occurred while processing {place_dm} - {name_dm}: {e}")
                 time.sleep(request_delay)
                 continue
-
+        
+        time.sleep(request_delay)
         logging.info("Next cycle...")
 
 
