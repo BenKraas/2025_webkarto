@@ -1,0 +1,76 @@
+#map {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, 'Liberation Sans', 'Noto Sans', sans-serif;
+}
+
+/* Modern list styling */
+ul.modern-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5em 0;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  overflow: hidden;
+}
+
+ul.modern-list li {
+  padding: 1em 1.5em;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 1.1em;
+  color: #222;
+  transition: background 0.2s;
+}
+
+ul.modern-list li:last-child {
+  border-bottom: none;
+}
+
+ul.modern-list li:hover {
+  background: #f5f7fa;
+  color: #0077ff;
+  cursor: pointer;
+}
+
+/* Modern table styling for feature details */
+table.modern-list-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  overflow: hidden;
+  margin: 1.5em 0;
+  font-size: 1.05em;
+}
+table.modern-list-table th, table.modern-list-table td {
+  padding: 0.75em 1em;
+  text-align: left;
+}
+table.modern-list-table thead th {
+  background: #f5f7fa;
+  color: #222;
+  font-weight: 600;
+  border-bottom: 2px solid #e0e0e0;
+}
+table.modern-list-table tbody tr {
+  transition: background 0.2s;
+}
+table.modern-list-table tbody tr:hover {
+  background: #f0f6ff;
+}
+table.modern-list-table td {
+  border-bottom: 1px solid #f0f0f0;
+}
+table.modern-list-table tbody tr:last-child td {
+  border-bottom: none;
+}

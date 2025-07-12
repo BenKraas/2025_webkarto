@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Simple Leaflet Webmap</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Leaflet CSS -->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-	<style>
-		#map {
-			height: 100vh;
-			width: 100vw;
-			margin: 0;
-			padding: 0;
-		}
-		body, html {
-			height: 100%;
-			margin: 0;
-		}
-	</style>
+  <meta charset="UTF-8">
+  <title>Simple Leaflet Webmap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-	<div id="map"></div>
-	<!-- Leaflet JS -->
-	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-	<script src="js/main.js"></script>
+  <div id="map-feature-container" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;display:flex;flex-direction:column;">
+    <div id="map" style="flex:0 0 70vh;min-height:50px;width:100vw;z-index:500;"></div>
+    <div id="resize-handle" style="height:8px;cursor:row-resize;background:#ccc;z-index:900;"></div>
+    <div id="feature-details" style="flex:1 1 30vh;min-height:40px;width:100vw;z-index:1000;background:white;padding:10px;overflow:auto;border-top:2px solid #888;box-shadow:0 -2px 8px rgba(0,0,0,0.08);"></div>
+  </div>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="js/feature_share.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/rescale_ratio.js"></script>
 </body>
 </html>
