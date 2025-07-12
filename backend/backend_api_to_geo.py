@@ -24,6 +24,8 @@ if not bahnhoefe_geodata_source.parent.exists():
     bahnhoefe_geodata_source.parent.mkdir(parents=True, exist_ok=True)
 if not bahnhoefe_geojson_target.parent.exists():
     bahnhoefe_geojson_target.parent.mkdir(parents=True, exist_ok=True)
+if not full_request_text_target.parent.exists():
+    full_request_text_target.parent.mkdir(parents=True, exist_ok=True)
 
 
 # Initialize logging to log to both file and console
