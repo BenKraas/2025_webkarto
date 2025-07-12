@@ -30,3 +30,5 @@ Dies ist ein Beispielprojekt, das eine API bereitstellt, um Live-Daten zu ziehen
 - Umrechnung muss noch geändert werden, da ein verspäteter ICE den Bahnhof komplett rot einfärbt, obwohl es nur eine Linie betrifft.
 
 ## Workflowdiagramm
+
+![Workflow Diagramm](workflow%20V1.png)
