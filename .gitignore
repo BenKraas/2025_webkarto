@@ -1,4 +1,5 @@
-final_departures.csv
-api_requests.log
-vrr_api_full_responses.txt
-data/*
+data/geodata/generated/*
+data/temp/*
+data/api/*
+data/logs/*
+
