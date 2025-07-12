@@ -17,11 +17,19 @@ bahnhoefe_geodata_source = root / 'data' / 'geodata' / 'source' / 'bahnhoefe.shp
 bahnhoefe_geojson_target = root / 'data' / 'geodata' / 'generated' / 'bahnhoefe_running.geojson'
 full_request_text_target = root / 'data' / 'temp' / 'vrr_api_full_responses.txt'
 
+# make sure all paths exist
+if not csv_file_target.parent.exists():
+    csv_file_target.parent.mkdir(parents=True, exist_ok=True)
+if not bahnhoefe_geodata_source.parent.exists():
+    bahnhoefe_geodata_source.parent.mkdir(parents=True, exist_ok=True)
+if not bahnhoefe_geojson_target.parent.exists():
+    bahnhoefe_geojson_target.parent.mkdir(parents=True, exist_ok=True)
+
 
 # Initialize logging to log to both file and console
 def init(root):
     if not os.path.exists(root / 'data' / 'logs'):
-        os.makedirs(root / 'data' / 'logs', exist_ok=True, parents=True)
+        os.makedirs(root / 'data' / 'logs', exist_ok=True)
     logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
