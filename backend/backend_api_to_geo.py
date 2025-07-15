@@ -35,6 +35,7 @@ def init_paths(__file__):
             path.parent.mkdir(parents=True, exist_ok=True)
     assert all(path.exists() for path in all_paths), "One or more paths do not exist."
 
+
 # Initialize logging to log to both file and console
 def init_logger(root):
     """
@@ -56,6 +57,7 @@ def init_logger(root):
     )
 
 
+# Main function to fetch and process public transport departure information from the VRR API
 def full_api_request(datetime_dt, place_dm, name_dm):
     """
     Fetches and processes public transport departure information from the VRR API for a given stop and datetime.
@@ -247,6 +249,7 @@ def full_api_request(datetime_dt, place_dm, name_dm):
     return df_departures, response.status_code
 
 
+# Function to update geospatial data with the latest departure information
 def update_geodata(csv_file_path, geodata_file_path, geodata_target, n_data: int):
     """
     Updates geospatial data by aggregating the latest departure information for each stop.
@@ -438,7 +441,7 @@ def main(delay_min, placename_list, n_entries):
 if __name__ == "__main__":
     # Initialize paths
     init_paths(__file__)
-    
+
     # Configuration for the main function
     init_logger(root)
 
