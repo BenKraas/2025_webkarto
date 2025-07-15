@@ -5,40 +5,52 @@ import pandas as pd
 import geopandas as gpd
 import uuid
 import time
-import os
 import logging
 from datetime import datetime
 from pathlib import Path
 
+
 # File paths (relative to the script's location)
-root = Path(__file__).parent.parent
-csv_file_target = root / "data" / "api" / "final_departures.csv"
-bahnhoefe_geodata_source = root / "data" / "geodata" / "source" / "bahnhoefe.shp"
-bahnhoefe_geojson_target = (
-    root / "data" / "geodata" / "generated" / "bahnhoefe_running.geojson"
-)
-full_request_text_target = root / "data" / "temp" / "vrr_api_full_responses.txt"
+def init_paths(__file__):
+    global root, csv_file_target, bahnhoefe_geodata_source, bahnhoefe_geojson_target, full_request_text_target, path_logging
+    root = Path(__file__).parent.parent
+    csv_file_target = root / "data" / "api" / "final_departures.csv"
+    bahnhoefe_geodata_source = root / "data" / "geodata" / "source" / "bahnhoefe.shp"
+    bahnhoefe_geojson_target = (
+        root / "data" / "geodata" / "generated" / "bahnhoefe_running.geojson"
+    )
+    full_request_text_target = root / "data" / "temp" / "vrr_api_full_responses.txt"
+    path_logging = root / "data" / "logs" / "api_requests.log"
 
-# make sure all paths exist
-if not csv_file_target.parent.exists():
-    csv_file_target.parent.mkdir(parents=True, exist_ok=True)
-if not bahnhoefe_geodata_source.parent.exists():
-    bahnhoefe_geodata_source.parent.mkdir(parents=True, exist_ok=True)
-if not bahnhoefe_geojson_target.parent.exists():
-    bahnhoefe_geojson_target.parent.mkdir(parents=True, exist_ok=True)
-if not full_request_text_target.parent.exists():
-    full_request_text_target.parent.mkdir(parents=True, exist_ok=True)
-
+    # List of all paths to ensure they exist
+    all_paths = [
+        csv_file_target,
+        bahnhoefe_geodata_source,
+        bahnhoefe_geojson_target,
+        full_request_text_target,
+        path_logging,
+    ]
+    for path in all_paths:
+        if not path.parent.exists():
+            path.parent.mkdir(parents=True, exist_ok=True)
+    assert all(path.exists() for path in all_paths), "One or more paths do not exist."
 
 # Initialize logging to log to both file and console
-def init(root):
-    if not os.path.exists(root / "data" / "logs"):
-        os.makedirs(root / "data" / "logs", exist_ok=True)
+def init_logger(root):
+    """
+    Initializes the application logger with both file and stream handlers.
+
+    Creates a 'logs' directory under 'data' if it does not exist, and sets up logging to write
+    INFO-level and above messages to both a log file ('api_requests.log') and the console.
+
+    Args:
+        root (Path): The root directory as a pathlib.Path object where the 'data/logs' directory will be created.
+    """
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(message)s",
         handlers=[
-            logging.FileHandler(root / "data" / "logs" / "api_requests.log"),
+            logging.FileHandler(path_logging),
             logging.StreamHandler(),
         ],
     )
@@ -424,8 +436,11 @@ def main(delay_min, placename_list, n_entries):
 
 
 if __name__ == "__main__":
+    # Initialize paths
+    init_paths(__file__)
+    
     # Configuration for the main function
-    init(root)
+    init_logger(root)
 
     # Set the delay in minutes and the number of entries to process
     delay_min = 10
