@@ -1,3 +1,14 @@
+
+
+/**
+ * main.js - Interactive Map for Ruhr Region Train Stations
+ *
+ * This script initializes a Leaflet map centered on the Ruhr region, Germany, and loads train station data from a local GeoJSON file.
+ * Each station is shown as a colored circle marker, where the color indicates the average train delay at that station (green = low, orange = moderate, red = high).
+ * Clicking a marker highlights it and sends its details to a handler for further display or processing.
+ * The map automatically highlights Bochum Hbf on load if present.
+ */
+
 // Initialize the map over the Ruhr region, Germany
 var map = L.map('map').setView([51.4, 7.0], 10);
 

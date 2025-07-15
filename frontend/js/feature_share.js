@@ -1,5 +1,9 @@
-// feature_share.js
-// Receives feature properties, transforms list properties into rows, and displays them.
+/**
+ * feature_share.js - Display Train Station Feature Details
+ *
+ * This script receives properties of a selected train station (feature) and displays its list-type properties (like departures, delays, etc.) as a table.
+ * Only columns listed in FEATURE_SHARE_COLUMNS are shown. The function is called automatically when a station is selected on the map.
+ */
 
 // List of columns (array property names) to keep. Modify this array to control which columns are shown.
 let FEATURE_SHARE_COLUMNS = ['stop', 'platforms', 'lines', 'scheduled_departures', 'real_departures', 'delays'];

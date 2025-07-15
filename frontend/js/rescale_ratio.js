@@ -1,5 +1,12 @@
-// rescale_ratio.js
-// Handles the resizable ratio between map and feature list
+/**
+ * rescale_ratio.js - Adjustable Map/Feature List Split
+ *
+ * This script lets users resize the vertical space between the map and the feature details list by dragging a handle.
+ * It updates the layout in real time and ensures the map resizes correctly. No external libraries needed.
+ */
+
+
+
 (function() {
   const mapDiv = document.getElementById('map');
   const featureDiv = document.getElementById('feature-details');
