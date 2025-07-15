@@ -10,7 +10,7 @@ import logging
 from datetime import datetime
 from pathlib import Path
 
-# File paths
+# File paths (relative to the script's location)
 root = Path(__file__).parent.parent
 csv_file_target = root / 'data' / 'api' / 'final_departures.csv'
 bahnhoefe_geodata_source = root / 'data' / 'geodata' / 'source' / 'bahnhoefe.shp'
@@ -42,6 +42,22 @@ def init(root):
 )
 
 def full_api_request(datetime_dt, place_dm, name_dm):
+    """
+    Fetches and processes public transport departure information from the VRR API for a given stop and datetime.
+    Args:
+        datetime_dt (datetime): The date and time for which departures are requested.
+        place_dm (str): The place or city of the stop.
+        name_dm (str): The name of the stop.
+    Returns:
+        tuple:
+            - pd.DataFrame: DataFrame containing processed departure information with fields such as stop, platform, line, direction, scheduled and real departure times, delay, and status.
+            - int: HTTP status code of the API response.
+    Raises:
+        requests.exceptions.RequestException: If the API request fails or returns an unsuccessful status code.
+    Side Effects:
+        - Logs API request and response status.
+        - Appends raw API responses to a debug text file.
+    """
 
     def communicate_response(response, place_dm, name_dm, datetime_dt):
         """Handles the response from the API and logs the status."""
@@ -188,8 +204,16 @@ def full_api_request(datetime_dt, place_dm, name_dm):
 
 def update_geodata(csv_file_path, geodata_file_path, geodata_target, n_data: int):
     """
-    For each stop in the DataFrame, get the last 10 departures and add them as lists into the GeoDataFrame.
-    The GeoDataFrame uses short column names due to shapefile limitations, so columns are mapped accordingly.
+    Updates geospatial data by aggregating the latest departure information for each stop.
+
+    Args:
+        csv_file_path (str or Path): Path to the CSV file containing departure data.
+        geodata_file_path (str or Path): Path to the input geospatial file (e.g., shapefile).
+        geodata_target (str or Path): Path to the output GeoJSON file where the updated geodata will be saved.
+        n_data (int): Number of latest departures to aggregate per stop.
+
+    The function reads the latest departure records from the CSV, aggregates the last `n_data` departures for each stop,
+    and merges this information into a new GeoDataFrame with one row per stop. The result is saved as a GeoJSON file.
     """
     # Define the number of rows to load from the CSV file
     row_load = n_data * 40
@@ -232,6 +256,30 @@ def update_geodata(csv_file_path, geodata_file_path, geodata_target, n_data: int
 
 # Main function to handle the API requests and manage the CSV file
 def main(delay_min, placename_list, n_entries):
+    """
+    Main loop for periodically fetching and updating geodata for a list of placenames.
+    Args:
+        delay_min (float): The total delay in minutes to space out all requests within a cycle.
+        placename_list (list of tuple): List of tuples, each containing (place_dm, name_dm) for API requests.
+        n_entries (int): Number of entries to include when updating geodata.
+    Behavior:
+        - Loads existing UUIDs from the target CSV to avoid duplicate entries.
+        - In an infinite loop:
+            - Updates geodata from source to target files.
+            - For each placename in the list:
+                - Makes an API request for departures.
+                - Appends new, unique departures to the CSV.
+                - Waits for a calculated delay between requests.
+            - Waits before starting the next cycle.
+        - Handles and logs errors gracefully, continuing operation after recoverable failures.
+    Note:
+        Requires global variables or configuration for:
+            - csv_file_target: Path to the CSV file for storing departures.
+            - bahnhoefe_geodata_source: Source geodata file path.
+            - bahnhoefe_geojson_target: Target GeoJSON file path.
+            - update_geodata: Function to update geodata.
+            - full_api_request: Function to perform the API request.
+    """
     total_requests = len(placename_list)
     delay_s = delay_min * 60  # convert minutes to seconds
     request_delay = delay_s / (total_requests + 1)  # time the actual requests so that they space out over the delay time
