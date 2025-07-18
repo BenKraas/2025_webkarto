@@ -208,13 +208,6 @@ def full_api_request(datetime_dt, place_dm, name_dm):
 
     # Check if the response is successful and contains data
     if response.status_code in [200, 204]:
-        # Write the raw response to a text file for debugging purposes
-        try:
-            with open(textfile, "a", encoding="utf-8") as f:
-                f.write(response.text + "\n\n")
-            logging.info(f"Response written to {textfile}")
-        except Exception as e:
-            logging.error(f"Error writing to {textfile}: {e}")
         data = response.json()
     else:
         # If the response is not successful, return an empty DataFrame and the status code
@@ -460,3 +453,5 @@ if __name__ == "__main__":
 
     # Start the main function with the specified parameters
     main(delay_min, placename_list, n_entries)
+
+    

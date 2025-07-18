@@ -6,7 +6,7 @@ from aiohttp import web
 # Paths
 ROOT = Path(__file__).resolve().parent
 FRONTEND_DIR = ROOT / "frontend"
-BACKEND_SCRIPT = ROOT / "backend" / "backend_api_to_geo.py"
+BACKEND_SCRIPT = ROOT / "backend" / "backend_api_to_geo_v2.py"
 
 
 # Serve static files (index.html, js, css, etc.)

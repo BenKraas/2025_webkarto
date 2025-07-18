@@ -39,5 +39,34 @@ function displayFeatureDetails(props) {
     document.getElementById('feature-details').innerHTML = html;
 }
 
+// Accepts a GeoJSON FeatureCollection and displays details for a selected feature
+function displayFeatureCollectionDetails(featureCollection, featureIndex = 0) {
+    if (!featureCollection || !featureCollection.features || featureCollection.features.length === 0) {
+        document.getElementById('feature-details').innerHTML = '<em>No features to display.</em>';
+        return;
+    }
+    const feature = featureCollection.features[featureIndex];
+    if (!feature || !feature.properties) {
+        document.getElementById('feature-details').innerHTML = '<em>No properties to display.</em>';
+        return;
+    }
+    // Parse array-like strings to arrays if needed
+    const props = { ...feature.properties };
+    Object.keys(props).forEach(k => {
+        if (typeof props[k] === 'string' && props[k].startsWith("['")) {
+            try {
+                // Replace single quotes with double quotes, handle None/NaN
+                let arrStr = props[k].replace(/'/g, '"').replace(/None/g, 'null').replace(/NaN/g, 'null');
+                props[k] = JSON.parse(arrStr);
+            } catch (e) {
+                // fallback: leave as string
+            }
+        }
+    });
+    // Call the original displayFeatureDetails with parsed props
+    displayFeatureDetails(props);
+}
+
 // Expose globally
 window.displayFeatureDetails = displayFeatureDetails;
+window.displayFeatureCollectionDetails = displayFeatureCollectionDetails;

@@ -296,45 +296,71 @@ class GeoDataHandler():
     def add_from_response(self, handler: APIHandler):
         """
         Adds geospatial data from the API response to the GeoDataFrame.
+        Each response updates or adds a single row per stop, squashing values into lists.
         Args:
             handler (APIHandler): The APIHandler instance containing the response.
         """
-        column_layout = {
-            "stop": handler.df_departures["stop"].fillna("").tolist(),
-            "lines": handler.df_departures["line"].fillna("").tolist(),
-            "directions": handler.df_departures["direction"].fillna("").tolist(),
-            "scheduled_departures": handler.df_departures["scheduled_departure"]
-            .fillna("")
-            .tolist(),
-            "real_departures": handler.df_departures["real_departure"].fillna("").tolist(),
-            "delays": handler.df_departures["delay_min"].fillna(0).tolist(),
-            "connection_exists": handler.df_departures["connection_exists"].fillna("").tolist(),
-            "latitude": handler.df_departures["latitude"].fillna(0).tolist(),
-            "longitude": handler.df_departures["longitude"].fillna(0).tolist(),
-            "datetime": handler.datetime_dt.isoformat(),
+        if handler.df_departures is None or handler.df_departures.empty:
+            raise ValueError("No response to process.")
+
+        stop_name = handler.df_departures["stop"].iloc[0] if "stop" in handler.df_departures.columns else "Unknown Stop"
+
+        # Convert timestamps to ISO format strings with double quotes
+        def to_iso(val):
+            if pd.isnull(val):
+                return None
+            if isinstance(val, datetime):
+                return f'"{val.isoformat()}"'
+            return f'"{str(val)}"'
+
+        scheduled_departures = [to_iso(dt) for dt in handler.df_departures["scheduled_departure"]]
+        real_departures = [to_iso(dt) for dt in handler.df_departures["real_departure"]]
+        scheduled_dates_iso = [to_iso(dt) for dt in handler.df_departures["scheduled_date_iso"]]
+
+        new_row = {
+            "stop": stop_name,
+            "lines": list(handler.df_departures["line"]),
+            "directions": list(handler.df_departures["direction"]),
+            "scheduled_departures": scheduled_departures,
+            "real_departures": real_departures,
+            "delays": list(handler.df_departures["delay_min"]),
+            "connection_exists": list(handler.df_departures["connection_exists"]),
+            "latitude": list(handler.df_departures["latitude"]),
+            "longitude": list(handler.df_departures["longitude"]),
+            "datetime": f'"{handler.datetime_dt.isoformat()}"',
         }
 
-        stopname = column_layout["stop"][0] if column_layout["stop"] else "Unknown Stop"
+        # Geometry: use first lat/lon for the stop
+        if new_row["latitude"] and new_row["longitude"]:
+            geometry = gpd.points_from_xy([new_row["longitude"][0]], [new_row["latitude"][0]])[0]
+        else:
+            geometry = None
+        new_row["geometry"] = geometry
 
-        if handler.df_departures is None:
-            raise ValueError("No response to process.")
-        
-        # Create a DataFrame from the column layout, merging with existing data
-        new_df = pd.DataFrame(column_layout)
-        if not self.gdf.empty:
-            new_df = pd.concat([self.gdf, new_df], ignore_index=True)
+        # Check if stop already exists in gdf
+        existing_idx = self.gdf[self.gdf["stop"] == stop_name].index
+        if len(existing_idx) > 0:
+            # Update the existing row
+            for col, val in new_row.items():
+                if col not in self.gdf.columns:
+                    self.gdf[col] = None
+                # Ensure geometry is a valid shapely object
+                if col == "geometry" and val is not None:
+                    from shapely.geometry import Point
+                    if not isinstance(val, Point):
+                        val = Point(new_row["longitude"][0], new_row["latitude"][0])
+                # Always assign lists directly, never as strings
+                if isinstance(val, list):
+                    self.gdf.at[existing_idx[0], col] = val
+                else:
+                    self.gdf.at[existing_idx[0], col] = val
+        else:
+            # Add new row
+            self.gdf = pd.concat([self.gdf, gpd.GeoDataFrame([new_row], crs="EPSG:4326")], ignore_index=True)
 
-        # Create a GeoSeries from the latitude and longitude columns
-        try:
-            self.gdf["geometry"] = gpd.points_from_xy(
-                self.gdf["longitude"], self.gdf["latitude"]
-            )
-            self.gdf.set_geometry("geometry", inplace=True)
-            self.gdf.crs = "EPSG:4326"  # Set the coordinate reference system to WGS 84
-            logging.info("  | GeoDataFrame created successfully.")
-        except Exception as e:
-            raise Exception(f"Error creating GeoDataFrame geometry: {e}")
-        
+        # Ensure geometry column is set
+        self.gdf.set_geometry("geometry", inplace=True)
+        self.gdf.crs = "EPSG:4326"
 
     
     def save_to_geojson(self):
@@ -406,10 +432,14 @@ if __name__ == "__main__":
     init(__file__)
 
     names = [
-        ("Duisburg", "HBF")
+        ("Duisburg", "HBF"),
+        ("Bochum", "HBF"),
+        ("Dortmund", "HBF"),
+        ("Essen", "HBF"),
+        ("Gelsenkirchen", "HBF"),
     ]
 
     # Start the main function with the specified parameters
-    main(names)
+    main(names, delay_min=1, n_entries=30)
 
     
