@@ -8,6 +8,8 @@ import time
 import logging
 from datetime import datetime
 from pathlib import Path
+from shapely.geometry import Point
+from pyproj import Transformer
 
 
 # File paths (relative to the script's location)
@@ -15,7 +17,7 @@ def init_paths(__file__):
     global root, csv_file_target, bahnhoefe_geodata_source, bahnhoefe_geojson_target, full_request_text_target, path_logging
     root = Path(__file__).parent.parent
     csv_file_target = root / "data" / "api" / "final_departures.csv"
-    bahnhoefe_geodata_source = root / "data" / "geodata" / "source" / "bahnhoefe.shp"
+    bahnhoefe_geodata_source = root / "data" / "geodata" / "generated" / "bahnhoefe.shp"
     bahnhoefe_geojson_target = (
         root / "data" / "geodata" / "generated" / "bahnhoefe_running.geojson"
     )
@@ -25,7 +27,6 @@ def init_paths(__file__):
     # List of all paths to ensure they exist
     all_paths = [
         csv_file_target,
-        bahnhoefe_geodata_source,
         bahnhoefe_geojson_target,
         full_request_text_target,
         path_logging,
@@ -97,6 +98,46 @@ def full_api_request(datetime_dt, place_dm, name_dm):
         return str(
             uuid.uuid5(uuid.NAMESPACE_DNS, f"{stop}|{scheduled_datetime}|{line}")
         )
+
+    def build_stopname_shp(response, bahnhoefe_geodata_source):
+        """
+        Builds a GeoDataFrame for the stop names from the API response, including geometry.
+
+        Args:
+            response (dict): The API response as a dictionary.
+            bahnhoefe_geodata_source (Path or str): Path to the shapefile to save or update.
+
+        Returns:
+            None. Saves the updated GeoDataFrame to bahnhoefe_geodata_source.
+        """
+
+        # Try to load existing shapefile, or create empty GeoDataFrame if not present
+        if Path(bahnhoefe_geodata_source).exists():
+            gdf = gpd.read_file(bahnhoefe_geodata_source)
+            existing_stops = set(gdf["stop"])
+        else:
+            gdf = gpd.GeoDataFrame(columns=["stop", "geometry"], crs="EPSG:31467") 
+            existing_stops = set()
+
+        try:
+            coords = response["dm"]["points"]["point"]["ref"].get("coords", None)
+            geometry = None
+            if isinstance(coords, str):
+                coords = coords.split(",")
+            coords = [float(coord) for coord in coords] if coords and len(coords) == 2 else None
+            stop_name = response.get("departureList", [{}])[0].get("stopName", "Unknown Stop")
+
+            # Assume coordinates are already in EPSG:25832 (as in your example)
+            if coords and len(coords) == 2:
+                geometry = Point(coords[0], coords[1])
+
+            if stop_name and stop_name not in existing_stops and geometry is not None:
+                new_row = pd.DataFrame([{"stop": stop_name, "geometry": geometry}])
+                new_gdf = gpd.GeoDataFrame(new_row, geometry="geometry", crs="EPSG:31467")
+                gdf = pd.concat([gdf, new_gdf], ignore_index=True)
+                gdf.to_file(bahnhoefe_geodata_source, driver="ESRI Shapefile")
+        except Exception as e:
+            logging.error(f"Error building stopname shapefile: {e}")
 
     def build_results(datetime_dt, make_uid, departures):
         """Builds a list of dictionaries containing the departure information."""
@@ -184,7 +225,7 @@ def full_api_request(datetime_dt, place_dm, name_dm):
         "itdTimeHour": datetime_dt.hour,
         "itdTimeMinute": datetime_dt.minute,
         "place_dm": place_dm,
-        "name_dm": name_dm,
+        "name_dm": name_dm
     }
 
     # Create a text file to store the raw API responses (Debugging purposes)
@@ -227,6 +268,9 @@ def full_api_request(datetime_dt, place_dm, name_dm):
 
     # Extract the departure list from the response data
     departures = data.get("departureList", [])
+
+    # Build the stopname shapefile 
+    build_stopname_shp(data, bahnhoefe_geodata_source)
 
     # Build the results from the departures
     df_departures = pd.DataFrame(build_results(datetime_dt, make_uid, departures))
@@ -375,18 +419,7 @@ def main(delay_min, placename_list, n_entries):
         logging.info("Starting a new cycle of requests...")
 
         # Update the geodata with the new departures
-        try:
-            update_geodata(
-                csv_file_target,
-                bahnhoefe_geodata_source,
-                bahnhoefe_geojson_target,
-                n_entries,
-            )
-            logging.info(f"Geodata updated and saved to {bahnhoefe_geojson_target}.")
-        except Exception as e:
-            logging.warning(
-                f"Error updating geodata: {e}. This may be harmless if you just started the script for the first time."
-            )
+        
 
         for place_dm, name_dm in placename_list:
             try:
@@ -410,6 +443,18 @@ def main(delay_min, placename_list, n_entries):
                         logging.info(
                             f"Appended {len(new_df)} new departures. Status code: {status_code}"
                         )
+                        try:
+                            update_geodata(
+                                csv_file_target,
+                                bahnhoefe_geodata_source,
+                                bahnhoefe_geojson_target,
+                                n_entries,
+                            )
+                            logging.info(f"Geodata updated and saved to {bahnhoefe_geojson_target}.")
+                        except Exception as e:
+                            logging.warning(
+                                f"Error updating geodata: {e}. This may be harmless if you just started the script for the first time."
+                            )
                     else:
                         logging.info("No new UUIDs to append.")
                 else:
@@ -446,7 +491,7 @@ if __name__ == "__main__":
     init_logger(root)
 
     # Set the delay in minutes and the number of entries to process
-    delay_min = 10
+    delay_min = 1
     n_entries = 30
     placename_list = [
         ("Duisburg", "HBF"),
