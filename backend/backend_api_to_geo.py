@@ -250,7 +250,7 @@ def full_api_request(datetime_dt, place_dm, name_dm):
 
 
 # Function to update geospatial data with the latest departure information
-def update_geodata(csv_file_path, geodata_file_path, geodata_target, n_data: int):
+def F(csv_file_path, geodata_file_path, geodata_target, n_data: int):
     """
     Updates geospatial data by aggregating the latest departure information for each stop.
 
@@ -374,21 +374,22 @@ def main(delay_min, placename_list, n_entries):
     while True:
         logging.info("Starting a new cycle of requests...")
 
-        # Update the geodata with the new departures
-        try:
-            update_geodata(
-                csv_file_target,
-                bahnhoefe_geodata_source,
-                bahnhoefe_geojson_target,
-                n_entries,
-            )
-            logging.info(f"Geodata updated and saved to {bahnhoefe_geojson_target}.")
-        except Exception as e:
-            logging.warning(
-                f"Error updating geodata: {e}. This may be harmless if you just started the script for the first time."
-            )
-
         for place_dm, name_dm in placename_list:
+            
+            # Update the geodata with the new departures
+            try:
+                update_geodata(
+                    csv_file_target,
+                    bahnhoefe_geodata_source,
+                    bahnhoefe_geojson_target,
+                    n_entries,
+                )
+                logging.info(f"Geodata updated and saved to {bahnhoefe_geojson_target}.")
+            except Exception as e:
+                logging.warning(
+                    f"Error updating geodata: {e}. This may be harmless if you just started the script for the first time."
+                )
+
             try:
                 datetime_dt = datetime.now()
 
