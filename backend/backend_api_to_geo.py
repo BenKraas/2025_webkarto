@@ -250,7 +250,7 @@ def full_api_request(datetime_dt, place_dm, name_dm):
 
 
 # Function to update geospatial data with the latest departure information
-def F(csv_file_path, geodata_file_path, geodata_target, n_data: int):
+def update_geodata(csv_file_path, geodata_file_path, geodata_target, n_data: int):
     """
     Updates geospatial data by aggregating the latest departure information for each stop.
 
