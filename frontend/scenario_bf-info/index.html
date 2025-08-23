@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Leaflet Webmap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Layout variables are now handled by CSS variables for full responsiveness -->
+  <div class="container-group">
+    <div class="main-content-wrapper">
+      <div id="left-panel">
+        <!-- Left panel content goes here -->
+        <div class="side-panel-title">Bahnhof Information</div>
+        <div class="side-panel-content" id="station-info">Click on a train station to see details...</div>
+      </div>
+      <div id="map-feature-container">
+        <div id="map"></div>
+        <div id="resize-handle"></div>
+        <div id="feature-details"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="js/feature_share.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/rescale_ratio.js"></script>
+</body>
+</html>

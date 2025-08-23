@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Leaflet Webmap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Layout variables are now handled by CSS variables for full responsiveness -->
+  <div class="container-group">
+    <div class="main-content-wrapper">
+      <div id="left-panel">
+        <!-- Left panel content goes here -->
+        <div class="side-panel-title">Legende</div>
+        <div class="side-panel-content">
+          <div class="map-legend">
+            <div class="legend-title"><strong>Verspätungs-Legende</strong></div>
+            <div class="legend-items">
+              <div class="legend-row"><span class="legend-color" style="background:#00cc44;"></span> Wenig Verspätung (≤ 1 min)</div>
+              <div class="legend-row"><span class="legend-color" style="background:#ffa500;"></span> Mittlere Verspätung (&gt; 1 min bis 20 min)</div>
+              <div class="legend-row"><span class="legend-color" style="background:#ff0000;"></span> Hohe Verspätung (&gt; 20 min)</div>
+            </div>
+            <div class="legend-note">Die Farben zeigen die durchschnittliche Zugverspätung pro Bahnhof.</div>
+            <hr style="margin: 10px 0;">
+            <div class="legend-credits">
+              <div>Karte: <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener">OpenStreetMap</a></div>
+              <div>Daten: Deutsche Bahn, VRR, eigene Auswertung</div>
+              <div>Design: inspiriert von modernen Kartenlegenden</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="map-feature-container">
+        <div id="map"></div>
+        <div id="resize-handle"></div>
+        <div id="feature-details"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="js/feature_share.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/rescale_ratio.js"></script>
+</body>
+</html>
