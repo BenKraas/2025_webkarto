@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-# imports
 import requests
 import pandas as pd
 import geopandas as gpd
@@ -454,7 +452,7 @@ if __name__ == "__main__":
     init_logger(root)
 
     # Set the delay in minutes and the number of entries to process
-    delay_min = 10
+    delay_min = 7
     n_entries = 30
     placename_list = [
         ("Duisburg", "HBF"),
