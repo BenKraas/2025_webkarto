@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# imports
 import requests
 import pandas as pd
 import geopandas as gpd
@@ -20,26 +22,18 @@ def init_paths(__file__):
     full_request_text_target = root / "data" / "temp" / "vrr_api_full_responses.txt"
     path_logging = root / "data" / "logs" / "api_requests.log"
 
-    # List of paths that must exist (source files)
-    required_paths = [
-        bahnhoefe_geodata_source,
-    ]
-    
-    # List of paths that will be created by the script (target files)
-    target_paths = [
+    # List of all paths to ensure they exist
+    all_paths = [
         csv_file_target,
+        bahnhoefe_geodata_source,
         bahnhoefe_geojson_target,
         full_request_text_target,
         path_logging,
     ]
-    
-    # Create parent directories for all paths
-    for path in required_paths + target_paths:
+    for path in all_paths:
         if not path.parent.exists():
             path.parent.mkdir(parents=True, exist_ok=True)
-    
-    # Only check that required source files exist
-    assert all(path.exists() for path in required_paths), f"One or more required source files do not exist: {[str(p) for p in required_paths if not p.exists()]}"
+    # Removed assertion to prevent exit if some files do not exist
 
 
 # Initialize logging to log to both file and console
@@ -380,21 +374,22 @@ def main(delay_min, placename_list, n_entries):
     while True:
         logging.info("Starting a new cycle of requests...")
 
-        # Update the geodata with the new departures
-        try:
-            update_geodata(
-                csv_file_target,
-                bahnhoefe_geodata_source,
-                bahnhoefe_geojson_target,
-                n_entries,
-            )
-            logging.info(f"Geodata updated and saved to {bahnhoefe_geojson_target}.")
-        except Exception as e:
-            logging.warning(
-                f"Error updating geodata: {e}. This may be harmless if you just started the script for the first time."
-            )
-
         for place_dm, name_dm in placename_list:
+            
+            # Update the geodata with the new departures
+            try:
+                update_geodata(
+                    csv_file_target,
+                    bahnhoefe_geodata_source,
+                    bahnhoefe_geojson_target,
+                    n_entries,
+                )
+                logging.info(f"Geodata updated and saved to {bahnhoefe_geojson_target}.")
+            except Exception as e:
+                logging.warning(
+                    f"Error updating geodata: {e}. This may be harmless if you just started the script for the first time."
+                )
+
             try:
                 datetime_dt = datetime.now()
 
@@ -452,7 +447,7 @@ if __name__ == "__main__":
     init_logger(root)
 
     # Set the delay in minutes and the number of entries to process
-    delay_min = 7
+    delay_min = 1
     n_entries = 30
     placename_list = [
         ("Duisburg", "HBF"),

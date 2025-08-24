@@ -19,14 +19,10 @@ async def start_backend_process():
         sys.executable,
         "-u",
         str(BACKEND_SCRIPT),
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.STDOUT,
         cwd=str(ROOT),
     )
     print(f"[INFO] Started backend process with PID {process.pid}")
-    # Stream output
-    async for line in process.stdout:
-        print(f"[backend] {line.decode().rstrip()}")
+    # Do not block on output; let the backend run in the background
     await process.wait()
     print(f"[INFO] Backend process exited with code {process.returncode}")
 
