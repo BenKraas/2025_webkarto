@@ -1,0 +1,2 @@
+stop.csv:
+https://www.opendata-oepnv.de/ht/de/organisation/verkehrsverbuende/vrr/startseite?tx_vrrkit_view%5Baction%5D=details&tx_vrrkit_view%5Bcontroller%5D=View&tx_vrrkit_view%5Bdataset_name%5D=haltestellen-vrr&cHash=6d8889cc9b3b34bf56992865cf62a47d
